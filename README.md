@@ -1,64 +1,119 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# PHP Versions API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Provides API endpoints for support information for PHP versions 5.6 and later.
 
-## About Laravel
+This is a Laravel-based application that leverages the Github Repositories API to stream release tags from the `php/php-src` repo. We are then parsing out old and irrelevant tags (ex: alpha, beta and release candidates) and storing them along with support dates.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The following endpoints are currently available:
+- GET `/versions`: Returns all PHP versions 5.6+
+    <details>
+        <summary>Sample Response</summary>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+  ```json
+    [{
+      "id": 1,
+      "major": 8,
+      "minor": 0,
+      "release": 10,
+      "tagged_at": "2021-08-24T17:48:14.000000Z",
+      "active_support_until": "2022-11-26T18:03:09.000000Z",
+      "security_support_until": "2023-11-26T18:03:09.000000Z",
+      "created_at": "2021-09-10T17:53:23.000000Z",
+      "updated_at": "2021-09-10T17:53:23.000000Z",
+      "needs_patch": false,
+      "needs_upgrade": false
+    },
+    {
+      "id": 4,
+      "major": 8,
+      "minor": 0,
+      "release": 9,
+      "tagged_at": "2021-07-29T14:58:35.000000Z",
+      "active_support_until": "2022-11-26T18:03:09.000000Z",
+      "security_support_until": "2023-11-26T18:03:09.000000Z",
+      "created_at": "2021-09-10T17:53:23.000000Z",
+      "updated_at": "2021-09-10T17:53:23.000000Z",
+      "needs_patch": true,
+      "needs_upgrade": false
+    },
+    {
+      "id": 6,
+      "major": 8,
+      "minor": 0,
+      "release": 8,
+      "tagged_at": "2021-06-29T09:56:31.000000Z",
+      "active_support_until": "2022-11-26T18:03:09.000000Z",
+      "security_support_until": "2023-11-26T18:03:09.000000Z",
+      "created_at": "2021-09-10T17:53:23.000000Z",
+      "updated_at": "2021-09-10T17:53:23.000000Z",
+      "needs_patch": true,
+      "needs_upgrade": false
+    }, ...]
+    ```
+</details>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- GET `/versions/:version`: Returns information for the major/minor/release level version requested. For specific releases (ex: 8.0.10), you will receive additional data for `needs_patch`, `needs_upgrade`, and `latest_release`.
+  <details>
+        <summary>Sample Response</summary>
+  
+  ```json
+  {
+    "provided": {
+      "id": 85,
+      "major": 7,
+      "minor": 3,
+      "release": 3,
+      "tagged_at": "2019-03-05T13:49:42.000000Z",
+      "active_support_until": "2020-12-06T16:08:24.000000Z",
+      "security_support_until": "2021-12-06T16:08:24.000000Z",
+      "created_at": "2021-09-10T17:53:24.000000Z",
+      "updated_at": "2021-09-10T17:53:24.000000Z",
+      "needs_patch": true,
+      "needs_upgrade": true
+    },
+    "latest_release": "8.0.10"
+  }
+    ```
+  </details>
+- GET `/versions/latest`: Returns a string value of the latest release of the highest major version
+  <details>
+  <summary>Sample Response</summary>
 
-## Learning Laravel
+  ```
+  "8.0.10"
+    ```
+    </details>
+- GET `/versions/minimum-supported/:support-type`: Takes a string `active` or `security` and returns the minimum version supported
+    <details>
+        <summary>Sample Response</summary>
+  
+  ```json
+  {
+    "id": 2,
+    "major": 7,
+    "minor": 4,
+    "release": 23,
+    "tagged_at": "2021-08-24T17:35:21.000000Z",
+    "active_support_until": "2021-11-28T20:46:01.000000Z",
+    "security_support_until": "2022-11-28T20:46:01.000000Z",
+    "created_at": "2021-09-10T17:53:23.000000Z",
+    "updated_at": "2021-09-10T17:53:23.000000Z",
+    "needs_patch": false,
+    "needs_upgrade": false
+  }
+    ```
+</details>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
-## Code of Conduct
+## Support us
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Tighten is a web development firm that works in Laravel, Vue, and React. You can learn more about us on our [web site](https://tighten.co/).
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
