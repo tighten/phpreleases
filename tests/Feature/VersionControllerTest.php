@@ -283,6 +283,12 @@ class VersionControllerTest extends TestCase
             'tagged_at' => now()->subDays(3),
         ]);
 
+        Version::factory()->create([
+            'major' => 7,
+            'minor' => 3,
+            'tagged_at' => now()->subDays(4),
+        ]);
+
         $this->getJson('api/versions/latest')
             ->assertJsonFragment([$latest->__toString()]);
     }

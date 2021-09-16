@@ -31,17 +31,6 @@ class SyncPhpVersions extends Command
         'orderBy' => '{field: TAG_COMMIT_DATE, direction: DESC}',
     ];
 
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     /**
      * Execute the console command.
      *
@@ -53,17 +42,18 @@ class SyncPhpVersions extends Command
 
         $versions = $this->fetchVersionsFromGitHub();
         // Map into arrays containing major, minor, and release numbers
+
         $versions  = $versions->reject(function ($item) {
-            // reject alphas, betas, RCs and some other non-convential tags
+            // reject alphas, betas, RCs and some other non-conventional tags
             return Str::contains($item['name'], ['RC', 'beta', 'alpha', 'rc', 'php_ibase_before_split', 'php4', 'php5_5_0']);
         })
             ->filter(function ($item) {
-                // include only tags with `-php`
+                // include only tags with `php`
                 return Str::contains($item['name'], 'php');
             })
             ->filter(function ($item) {
                 // include only version 5.6 and after
-                return (bool) preg_match('/5\.6\.[0-9]|([6-9]\.[0-9]\.[0-9])|(1[0-9]\.[0-9])/', $item['name']);
+                return (bool) preg_match('/5\.6\.[0-9]|([6-9]\.[0-9]\.[0-9])|(1[0-9]\.[0-9]\.[0-9])/', $item['name']);
             })
             ->map(function ($item) {
                 $tagDate = $item['target']['tagger']['date'];

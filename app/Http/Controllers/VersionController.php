@@ -43,7 +43,7 @@ class VersionController
     {
         $version = explode('.', $request->version);
 
-        if (array_key_exists(2, $version)) {
+        if (count($version) === 3) {
             $provided = Version::firstWhere([
                 'major' => $version[0],
                 'minor' => $version[1],
