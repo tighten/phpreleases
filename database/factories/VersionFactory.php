@@ -25,7 +25,7 @@ class VersionFactory extends Factory
         $taggedAt = CarbonImmutable::now()
             ->subMonths($this->faker->randomNumber(1))
             ->subDays($this->faker->randomNumber(2));
-        
+
         return [
             'major' => (string) $this->faker->numberBetween(5, 8),
             'minor' => (string) $this->faker->numberBetween(0, 6),
