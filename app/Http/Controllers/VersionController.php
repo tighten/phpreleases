@@ -33,9 +33,9 @@ class VersionController
     {
         return response()->json(
             (string) Version::orderByDesc('major')
-            ->orderByDesc('minor')
-            ->orderByDesc('release')
-            ->first()
+                ->orderByDesc('minor')
+                ->orderByDesc('release')
+                ->first()
         );
     }
 
@@ -45,9 +45,9 @@ class VersionController
 
         if (array_key_exists(2, $version)) {
             $provided = Version::firstWhere([
-                    'major' => $version[0],
-                    'minor' => $version[1],
-                    'release' => $version[2],
+                'major' => $version[0],
+                'minor' => $version[1],
+                'release' => $version[2],
             ]);
 
             return response()->json([

@@ -32,7 +32,7 @@ class VersionControllerTest extends TestCase
             'security_support_until' => $now->addYear(),
         ]);
 
-        //older release
+        // older release
         Version::factory()->create([
             'major' => 7,
             'minor' => 3,
@@ -77,7 +77,7 @@ class VersionControllerTest extends TestCase
             'active_support_until' => $now->addYear(),
         ]);
 
-        //older release
+        // older release
         Version::factory()->create([
             'major' => 7,
             'minor' => 4,

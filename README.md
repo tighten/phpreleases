@@ -2,7 +2,7 @@
 
 Provides API endpoints for support information for PHP versions 5.6 and later.
 
-This is a Laravel-based application that leverages the Github Repositories API to stream release tags from the `php/php-src` repo. We are then parsing out old and irrelevant tags (ex: alpha, beta and release candidates) and storing them along with support dates.
+This is a Laravel-based application that leverages the GitHub Repositories API to stream release tags from the `php/php-src` repo. We are then parsing out old and irrelevant tags (ex: alpha, beta and release candidates) and storing them along with support dates.
 
 The following endpoints are currently available:
 - GET `/versions`: Returns all PHP versions 5.6+

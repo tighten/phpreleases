@@ -52,10 +52,10 @@ class SyncPhpVersions extends Command
         Log::info('Syncing PHP Versions');
 
         $versions = $this->fetchVersionsFromGitHub();
-            // Map into arrays containing major, minor, and release numbers
+        // Map into arrays containing major, minor, and release numbers
         $versions  = $versions->reject(function ($item) {
-                // reject alphas, betas, RCs and some other non-convential tags
-                return Str::contains($item['name'], ['RC', 'beta', 'alpha', 'rc', 'php_ibase_before_split', 'php4', 'php5_5_0']);
+            // reject alphas, betas, RCs and some other non-convential tags
+            return Str::contains($item['name'], ['RC', 'beta', 'alpha', 'rc', 'php_ibase_before_split', 'php4', 'php5_5_0']);
         })
             ->filter(function ($item) {
                 // include only tags with `-php`
