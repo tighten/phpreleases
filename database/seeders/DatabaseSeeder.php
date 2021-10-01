@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Console\Commands\SyncPhpVersions;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        Artisan::call(SyncPhpVersions::class);
     }
 }

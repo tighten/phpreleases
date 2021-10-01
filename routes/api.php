@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\VersionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('versions', [VersionController::class, 'index']);
+
+Route::get('versions/minimum-supported/{supportType}', [VersionController::class, 'minimumSupported']);
+
+Route::get('versions/latest', [VersionController::class, 'showLatest']);
+
+Route::get('versions/{version}', [VersionController::class, 'show']);
