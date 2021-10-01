@@ -61,16 +61,18 @@ class SyncPhpVersions extends Command
                 ->where('release', 0)
                 ->firstOrFail();
 
-            $version = Version::firstOrCreate([
-                'major' => $item['major'],
-                'minor' => $item['minor'],
-                'release' => $item['release'],
-            ],
-            [
-                'tagged_at' => $item['tagged_at'],
-                'active_support_until' => $initialRelease['active_support_until'],
-                'security_support_until' => $initialRelease['security_support_until'],
-            ]);
+            $version = Version::firstOrCreate(
+                [
+                    'major' => $item['major'],
+                    'minor' => $item['minor'],
+                    'release' => $item['release'],
+                ],
+                [
+                    'tagged_at' => $item['tagged_at'],
+                    'active_support_until' => $initialRelease['active_support_until'],
+                    'security_support_until' => $initialRelease['security_support_until'],
+                ]
+            );
 
             if ($version->wasRecentlyCreated) {
                 $this->info('Created PHP version ' . $version);
