@@ -35,7 +35,7 @@ class SyncPhpReleases extends Command
     {
         Log::info('Syncing PHP Releases');
 
-        $releases = $this->filterToUsefulreleases($this->fetchreleasesFromGitHub());
+        $releases = $this->filterToUsefulReleases($this->fetchReleasesFromGitHub());
 
         // Map into arrays containing major, minor, and release numbers
         $releases = $releases->map(function ($item) {
@@ -84,12 +84,12 @@ class SyncPhpReleases extends Command
         $this->info('Finished saving PHP releases.');
     }
 
-    private function fetchreleasesFromGitHub()
+    private function fetchReleasesFromGitHub()
     {
         return (new FetchReleasesFromGitHub())();
     }
 
-    private function filterToUsefulreleases(Collection $releases): Collection
+    private function filterToUsefulReleases(Collection $releases): Collection
     {
         return $releases->reject(function ($item) {
             // reject alphas, betas, RCs and some other non-conventional tags
