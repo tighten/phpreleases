@@ -24,7 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('sync:php-versions')->twiceDaily();
+         $schedule->command('sync:php-versions')->twiceDaily(1, 13);
+         $schedule->command('sync:php-version-graphic')->daily();
     }
 
     /**
