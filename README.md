@@ -1,11 +1,11 @@
-# PHP Versions API
+# PHP Releases API
 
-Provides API endpoints for support information for PHP versions 5.6 and later.
+Provides API endpoints for support information for PHP major/minor versions and releases 5.6 and later.
 
 This is a Laravel-based application that leverages the GitHub Repositories API to stream release tags from the `php/php-src` repo. We are then parsing out old and irrelevant tags (ex: alpha, beta and release candidates) and storing them along with support dates.
 
-The following endpoints are currently available:
-- GET `/versions`: Returns all PHP versions 5.6+
+The following endpoints are currently available, along with the optional `/versions` route alias:
+- GET `/releases`: Returns all PHP releases 5.6+
     <details>
         <summary>Sample Response</summary>
 
@@ -52,7 +52,7 @@ The following endpoints are currently available:
     ```
 </details>
 
-- GET `/versions/:version`: Returns information for the major/minor/release level version requested. For specific releases (ex: 8.0.10), you will receive additional data for `needs_patch`, `needs_upgrade`, and `latest_release`.
+- GET `/releases/:release`: Returns information for the major/minor/release level requested. For specific releases (ex: 8.0.10), you will receive additional data for `needs_patch`, `needs_upgrade`, and `latest_release`.
   <details>
         <summary>Sample Response</summary>
   
@@ -75,7 +75,7 @@ The following endpoints are currently available:
   }
     ```
   </details>
-- GET `/versions/latest`: Returns a string value of the latest release of the highest major version
+- GET `/releases/latest`: Returns a string value of the latest release of the highest major release
   <details>
   <summary>Sample Response</summary>
 
@@ -83,7 +83,7 @@ The following endpoints are currently available:
   "8.0.10"
     ```
     </details>
-- GET `/versions/minimum-supported/:support-type`: Takes a string `active` or `security` and returns the minimum version supported
+- GET `/releases/minimum-supported/:support-type`: Takes a string `active` or `security` and returns the minimum release supported
     <details>
         <summary>Sample Response</summary>
   

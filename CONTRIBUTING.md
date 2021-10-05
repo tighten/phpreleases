@@ -32,7 +32,7 @@ Before submitting a pull request:
 - Run `composer install`
 - Run `cp .env.example .env` in the terminal
 - Generate a [Github Personal Access token](https://github.com/settings/tokens) and store it as the `GITHUB_TOKEN` value in `.env`
-- Create a database called `php_versions`
+- Create a database called `phpreleases`
 - Run `php artisan migrate --seed`
 
 ### Testing

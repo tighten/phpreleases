@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Version extends Model
+class Release extends Model
 {
     use HasFactory;
 
@@ -52,7 +52,7 @@ class Version extends Model
 
     public function getNeedsPatchAttribute()
     {
-        return $this->attributes['needs_patch'] = $this->needs_upgrade || $this->release !== Version::latestReleaseForMinorVersion($this->major, $this->minor)->first()->release;
+        return $this->attributes['needs_patch'] = $this->needs_upgrade || $this->release !== Release::latestReleaseForMinorVersion($this->major, $this->minor)->first()->release;
     }
 
     public function __toString()

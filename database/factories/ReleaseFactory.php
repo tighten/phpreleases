@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\Version;
+use App\Models\Release;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class VersionFactory extends Factory
+class ReleaseFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Version::class;
+    protected $model = Release::class;
 
     /**
      * Define the model's default state.
