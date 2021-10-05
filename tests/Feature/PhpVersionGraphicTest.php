@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -28,6 +29,9 @@ class PhpVersionGraphicTest extends TestCase
         // If for some reason php.net
         Storage::fake('public');
 
+        Log::shouldReceive('warning')
+            ->with('Failed fetching the svg');
+
         Http::fake([
             'https://www.php.net/images/supported-versions.php' => Http::response(file_get_contents('tests/responses/fake-supported-versions-not-found.svg')),
         ]);
@@ -35,7 +39,6 @@ class PhpVersionGraphicTest extends TestCase
         $this->artisan('sync:php-version-graphic');
 
         Storage::disk('public')->assertMissing('supported-versions.svg');
-
     }
 
     /** @test */
@@ -55,5 +58,16 @@ class PhpVersionGraphicTest extends TestCase
         // Run the command again. Since there is no change, we should get an error code
         $this->artisan('sync:php-version-graphic')
             ->assertExitCode(1);
+    }
+
+    /** @test */
+    public function it_checks_that_the_file_exists()
+    {
+        Storage::fake('public');
+
+        Storage::disk('public')->assertMissing('supported-versions.svg');
+
+        $this->get('/')
+            ->assertViewHas(['showGraphic' => false]);
     }
 }

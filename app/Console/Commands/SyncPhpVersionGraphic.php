@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -46,7 +45,7 @@ class SyncPhpVersionGraphic extends Command
 
         // checks if we get an html response back, means the image wasn't found
         if (str_contains($svgResponse, '<!DOCTYPE html>')) {
-            Log::info('failed fetching the svg');
+            Log::warning('Failed fetching the svg');
 
             return 1;
         }
@@ -56,8 +55,6 @@ class SyncPhpVersionGraphic extends Command
             Storage::disk('public')->exists('supported-versions.svg')
             && Storage::disk('public')->get('supported-versions.svg') === $svgResponse->body()
         ) {
-            Log::info('no change to the svg');
-
             return 1;
         }
 
