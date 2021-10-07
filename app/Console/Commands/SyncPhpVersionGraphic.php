@@ -43,14 +43,14 @@ class SyncPhpVersionGraphic extends Command
     {
         $svgResponse = Http::get('https://www.php.net/images/supported-versions.php');
 
-        // checks if we get an html response back, means the image wasn't found
+        // Check if we get an HTML response back, which means the image wasn't found
         if (str_contains($svgResponse, '<!DOCTYPE html>')) {
             Log::warning('Failed fetching the svg');
 
             return 1;
         }
 
-        //checks if there are any changes to the svg
+        // Check if there are any changes to the SVG since we last synced it
         if (
             Storage::disk('public')->exists('supported-versions.svg')
             && Storage::disk('public')->get('supported-versions.svg') === $svgResponse->body()
