@@ -13,9 +13,9 @@ class CreateReleasesTable extends Migration
             $table->integer('major');
             $table->integer('minor');
             $table->integer('release');
-            $table->timestamp('tagged_at');
-            $table->timestamp('active_support_until');
-            $table->timestamp('security_support_until');
+            $table->dateTime('tagged_at');
+            $table->dateTime('active_support_until');
+            $table->dateTime('security_support_until');
             $table->timestamps();
         });
     }
