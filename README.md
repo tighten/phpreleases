@@ -56,7 +56,7 @@ The following endpoints are currently available, along with the optional `/versi
     ```
 </details>
 
-- GET `/releases/:release`: Returns information for the major/minor/release level requested. For specific releases (ex: 8.0.10), you will receive additional data for `needs_patch`, `needs_upgrade`, and `latest_release`.
+- GET `/releases/:release`: Takes string (ex: "7", "7.2", "7.2.12") and returns information for the major/minor/release level version requested. For specific releases (ex: 8.0.10), you will additionally receive PHP's `latest_release` number.
   <details>
         <summary>Sample Response</summary>
   
