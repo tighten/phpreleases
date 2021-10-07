@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Console\Commands\SyncPhpReleaseGraphic;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,7 @@ class PhpVersionGraphicTest extends TestCase
             'https://www.php.net/images/supported-versions.php' => Http::response(file_get_contents('tests/responses/fake-supported-versions.svg')),
         ]);
 
-        $this->artisan('sync:php-version-graphic');
+        $this->artisan(SyncPhpReleaseGraphic::class);
 
         Storage::disk('public')->assertExists('supported-versions.svg');
     }
@@ -35,7 +36,7 @@ class PhpVersionGraphicTest extends TestCase
             'https://www.php.net/images/supported-versions.php' => Http::response(file_get_contents('tests/responses/fake-supported-versions-not-found.svg')),
         ]);
 
-        $this->artisan('sync:php-version-graphic');
+        $this->artisan(SyncPhpReleaseGraphic::class);
 
         Storage::disk('public')->assertMissing('supported-versions.svg');
     }
@@ -50,13 +51,13 @@ class PhpVersionGraphicTest extends TestCase
         ]);
 
         // Create the initial svg
-        $this->artisan('sync:php-version-graphic');
+        $this->artisan(SyncPhpReleaseGraphic::class);
 
         Storage::disk('public')->assertExists('supported-versions.svg');
         $lastModified = Storage::disk('public')->lastModified('supported-versions.svg');
 
         sleep(2);
-        $this->artisan('sync:php-version-graphic');
+        $this->artisan(SyncPhpReleaseGraphic::class);
 
         $this->assertSame($lastModified, Storage::disk('public')->lastModified('supported-versions.svg'));
     }

@@ -4,7 +4,7 @@ namespace App\Actions;
 
 use Illuminate\Support\Facades\Http;
 
-class FetchVersionsFromGitHub
+class FetchReleasesFromGitHub
 {
     private array $filters = [
         'first' => '100',
@@ -14,7 +14,7 @@ class FetchVersionsFromGitHub
 
     public function __invoke()
     {
-        return cache()->remember('github::php-versions', HOUR_IN_SECONDS, function () {
+        return cache()->remember('github::php-releases', HOUR_IN_SECONDS, function () {
             $tags = collect();
 
             do {

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\VersionController;
+use App\Http\Controllers\ReleaseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('versions', [VersionController::class, 'index']);
+Route::get('releases', [ReleaseController::class, 'index']);
 
-Route::get('versions/minimum-supported/{supportType}', [VersionController::class, 'minimumSupported']);
+Route::get('releases/minimum-supported/{supportType}', [ReleaseController::class, 'minimumSupported']);
 
-Route::get('versions/latest', [VersionController::class, 'showLatest']);
+Route::get('releases/latest', [ReleaseController::class, 'showLatest']);
 
-Route::get('versions/{version}', [VersionController::class, 'show']);
+Route::get('releases/{release}', [ReleaseController::class, 'show']);
+
+
+Route::get('versions', [ReleaseController::class, 'index']);
+
+Route::get('versions/minimum-supported/{supportType}', [ReleaseController::class, 'minimumSupported']);
+
+Route::get('versions/latest', [ReleaseController::class, 'showLatest']);
+
+Route::get('versions/{release}', [ReleaseController::class, 'show']);

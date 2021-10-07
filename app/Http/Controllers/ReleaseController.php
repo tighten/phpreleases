@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Version;
+use App\Models\Release;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class VersionController
+class ReleaseController
 {
     public function index()
     {
         return response()->json(
-            Version::orderByDesc('major')
+            Release::orderByDesc('major')
                 ->orderByDesc('minor')
                 ->orderByDesc('release')
                 ->get()
@@ -21,7 +21,7 @@ class VersionController
     public function minimumSupported(string $supportType = 'active')
     {
         return response()->json(
-            Version::where("{$supportType}_support_until", '>', Carbon::now())
+            Release::where("{$supportType}_support_until", '>', Carbon::now())
                 ->orderBy('major')
                 ->orderBy('minor')
                 ->orderByDesc('release')
@@ -32,7 +32,7 @@ class VersionController
     public function showLatest()
     {
         return response()->json(
-            (string) Version::orderByDesc('major')
+            (string) Release::orderByDesc('major')
                 ->orderByDesc('minor')
                 ->orderByDesc('release')
                 ->first()
@@ -41,18 +41,18 @@ class VersionController
 
     public function show(Request $request)
     {
-        $version = explode('.', $request->version);
+        $release = explode('.', $request->release);
 
-        if (count($version) === 3) {
-            $provided = Version::firstWhere([
-                'major' => $version[0],
-                'minor' => $version[1],
-                'release' => $version[2],
+        if (count($release) === 3) {
+            $provided = Release::firstWhere([
+                'major' => $release[0],
+                'minor' => $release[1],
+                'release' => $release[2],
             ]);
 
             return response()->json([
                 'provided' => $provided,
-                'latest_release' => (string) Version::orderByDesc('major')
+                'latest_release' => (string) Release::orderByDesc('major')
                     ->orderByDesc('minor')
                     ->orderByDesc('release')
                     ->first(),
@@ -60,13 +60,13 @@ class VersionController
         }
 
         return response()->json(
-            Version::query()
-                ->when(array_key_exists(1, $version), function ($query) use ($version) {
-                    $query->where('major', $version[0])
-                        ->where('minor', $version[1]);
+            Release::query()
+                ->when(array_key_exists(1, $release), function ($query) use ($release) {
+                    $query->where('major', $release[0])
+                        ->where('minor', $release[1]);
                 })
-                ->when(array_key_exists(0, $version), function ($query) use ($version) {
-                    $query->where('major', $version[0]);
+                ->when(array_key_exists(0, $release), function ($query) use ($release) {
+                    $query->where('major', $release[0]);
                 })
                 ->get()
         );

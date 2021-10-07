@@ -1,8 +1,8 @@
-        The following endpoints are currently available:
+The following endpoints are currently available, along with the optional `/versions` route alias:
 
-### GET `/api/versions`
+### GET `/api/releases`
 
-Returns all PHP versions 5.6+
+Returns all PHP releases 5.6+.
 
 **Sample Response**
 
@@ -51,9 +51,9 @@ Returns all PHP versions 5.6+
     }, ...]
 ```
 
-### GET `/api/versions/:version`
+### GET `/api/releases/:release`
 
-Returns information for the major/minor/release level version requested. For specific releases (ex: 8.0.10), you will receive additional data for `needs_patch`, `needs_upgrade`, and `latest_release`.
+Takes string (ex: "7", "7.2", "7.2.12") and returns information for the major/minor/release level version requested. For specific releases (ex: 8.0.10), you will additionally receive PHP's `latest_release` number.
 
 **Sample Response**
 
@@ -77,9 +77,9 @@ Returns information for the major/minor/release level version requested. For spe
   }
 ```
 
-### GET `/api/versions/latest`
+### GET `/api/releases/latest`
 
-Returns a string value of the latest release of the highest major version
+Returns a string value of the latest release of the highest major version.
 
 **Sample Response**
 
@@ -87,9 +87,9 @@ Returns a string value of the latest release of the highest major version
   "8.0.10"
 ```
 
-### GET `/api/versions/minimum-supported/:support-type`
+### GET `/api/releases/minimum-supported/:support-type`
 
-Takes a string `active` or `security` and returns the minimum version supported
+Takes a string `active` or `security` and returns the minimum release supported.
 
 **Sample Response**
 

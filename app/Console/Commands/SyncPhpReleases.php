@@ -2,28 +2,28 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\FetchVersionsFromGitHub;
-use App\Models\Version;
+use App\Actions\FetchReleasesFromGitHub;
+use App\Models\Release;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class SyncPhpVersions extends Command
+class SyncPhpReleases extends Command
 {
-    protected $signature = 'sync:php-versions';
+    protected $signature = 'sync:php-releases';
 
-    protected $description = 'Pull PHP versions from GitHub into our application.';
+    protected $description = 'Pull PHP releases from GitHub into our application.';
 
     public function handle()
     {
-        Log::info('Syncing PHP Versions');
+        Log::info('Syncing PHP Releases');
 
-        $versions = $this->filterToUsefulVersions($this->fetchVersionsFromGitHub());
+        $releases = $this->filterToUsefulReleases($this->fetchReleasesFromGitHub());
 
         // Map into arrays containing major, minor, and release numbers
-        $versions = $versions->map(function ($item) {
+        $releases = $releases->map(function ($item) {
             $tagDate = $item['target']['tagger']['date'];
             $pieces = explode('.', ltrim($item['name'], 'php-'));
 
@@ -38,15 +38,15 @@ class SyncPhpVersions extends Command
             ];
         });
 
-        $versions->each(function ($item) use ($versions) {
+        $releases->each(function ($item) use ($releases) {
             // fetch the initial release of the minor version so we access the support dates
-            $initialRelease = $versions
+            $initialRelease = $releases
                 ->where('major', $item['major'])
                 ->where('minor', $item['minor'])
                 ->where('release', 0)
                 ->firstOrFail();
 
-            $version = Version::firstOrCreate(
+            $release = Release::firstOrCreate(
                 [
                     'major' => $item['major'],
                     'minor' => $item['minor'],
@@ -59,24 +59,24 @@ class SyncPhpVersions extends Command
                 ]
             );
 
-            if ($version->wasRecentlyCreated) {
-                $this->info('Created PHP version ' . $version);
+            if ($release->wasRecentlyCreated) {
+                $this->info('Created PHP release ' . $release);
             }
 
-            return $version;
+            return $release;
         });
 
-        $this->info('Finished saving PHP versions.');
+        $this->info('Finished saving PHP releases.');
     }
 
-    private function fetchVersionsFromGitHub()
+    private function fetchReleasesFromGitHub()
     {
-        return (new FetchVersionsFromGitHub())();
+        return (new FetchReleasesFromGitHub())();
     }
 
-    private function filterToUsefulVersions(Collection $versions): Collection
+    private function filterToUsefulReleases(Collection $releases): Collection
     {
-        return $versions->reject(function ($item) {
+        return $releases->reject(function ($item) {
             // reject alphas, betas, RCs and some other non-conventional tags
             return Str::contains($item['name'], ['RC', 'beta', 'alpha', 'rc', 'php_ibase_before_split', 'php4', 'php5_5_0']);
         })
