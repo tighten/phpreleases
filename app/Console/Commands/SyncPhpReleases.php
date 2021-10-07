@@ -12,9 +12,9 @@ use Illuminate\Support\Str;
 
 class SyncPhpReleases extends Command
 {
-    protected $signature = 'sync:php-versions';
+    protected $signature = 'sync:php-releases';
 
-    protected $description = 'Pull PHP versions from GitHub into our application.';
+    protected $description = 'Pull PHP releases from GitHub into our application.';
 
     public function handle()
     {

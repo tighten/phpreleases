@@ -20,11 +20,11 @@ class ReleaseControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_the_minimum_security_supported_version()
+    public function it_can_get_the_minimum_security_supported_release()
     {
         $now = CarbonImmutable::now();
 
-        // version that should be returned
+        // release that should be returned
         Release::factory()->create([
             'major' => 7,
             'minor' => 3,
@@ -40,7 +40,7 @@ class ReleaseControllerTest extends TestCase
             'security_support_until' => $now->addYear(),
         ]);
 
-        // newer major version
+        // newer major release
         Release::factory()->create([
             'major' => 8,
             'minor' => 0,
@@ -48,7 +48,7 @@ class ReleaseControllerTest extends TestCase
             'security_support_until' => $now->addYears(2),
         ]);
 
-        // unsupported version
+        // unsupported release
         Release::factory()->create([
             'major' => 5,
             'minor' => 4,
@@ -65,11 +65,11 @@ class ReleaseControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_the_minimum_active_supported_version()
+    public function it_can_get_the_minimum_active_supported_release()
     {
         $now = CarbonImmutable::now();
 
-        // version that should be returned
+        // release that should be returned
         Release::factory()->create([
             'major' => 7,
             'minor' => 4,
@@ -85,7 +85,7 @@ class ReleaseControllerTest extends TestCase
             'active_support_until' => $now->addYear(),
         ]);
 
-        // newer major version
+        // newer major release
         Release::factory()->create([
             'major' => 8,
             'minor' => 0,
@@ -93,7 +93,7 @@ class ReleaseControllerTest extends TestCase
             'active_support_until' => $now->addYears(2),
         ]);
 
-        // unsupported version
+        // unsupported release
         Release::factory()->create([
             'major' => 7,
             'minor' => 3,
@@ -110,9 +110,9 @@ class ReleaseControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_parse_a_php_version_and_return_all_details()
+    public function it_can_parse_a_php_release_and_return_all_details()
     {
-        $currentVersion = Release::factory()->create([
+        $currentRelease = Release::factory()->create([
             'major' => PHP_MAJOR_VERSION,
             'minor' => PHP_MINOR_VERSION,
             'release' => PHP_RELEASE_VERSION,
@@ -120,12 +120,12 @@ class ReleaseControllerTest extends TestCase
 
         $this->getJson('api/releases/' . phpversion('tidy'))
             ->assertJsonFragment([
-                'major' => (string) $currentVersion->major,
-                'minor' => (string) $currentVersion->minor,
-                'release' => (string) $currentVersion->release,
-                'tagged_at' => $currentVersion->tagged_at,
-                'active_support_until' => $currentVersion->active_support_until,
-                'security_support_until' => $currentVersion->security_support_until,
+                'major' => (string) $currentRelease->major,
+                'minor' => (string) $currentRelease->minor,
+                'release' => (string) $currentRelease->release,
+                'tagged_at' => $currentRelease->tagged_at,
+                'active_support_until' => $currentRelease->active_support_until,
+                'security_support_until' => $currentRelease->security_support_until,
             ]);
     }
 
@@ -236,9 +236,9 @@ class ReleaseControllerTest extends TestCase
     }
 
     /** @test */
-    public function it_can_get_the_latest_version()
+    public function it_can_get_the_latest_release()
     {
-          $version = Release::factory()->create([
+          $release = Release::factory()->create([
               'major' => 10,
               'minor' => 10,
               'release' => 0,
@@ -263,11 +263,11 @@ class ReleaseControllerTest extends TestCase
         ]);
 
         $this->get('api/releases/latest')
-            ->assertJsonFragment([$version->__toString()]);
+            ->assertJsonFragment([$release->__toString()]);
     }
 
     /** @test */
-    public function it_returns_the_highest_version_number_as_latest_release()
+    public function it_returns_the_highest_release_number_as_latest_release()
     {
         $now = CarbonImmutable::now();
 
@@ -296,11 +296,11 @@ class ReleaseControllerTest extends TestCase
     /** @test */
     public function it_returns_the_expected_value_for_changelog_url()
     {
-        $version = Version::factory()->create();
+        $release = Release::factory()->create();
 
         $this->assertSame(
-            "https://www.php.net/ChangeLog-{$version->major}.php#{$version->__toString()}",
-            $version->changelog_url
+            "https://www.php.net/ChangeLog-{$release->major}.php#{$release->__toString()}",
+            $release->changelog_url
         );
     }
 }

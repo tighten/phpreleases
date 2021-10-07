@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-class SyncPhpVersionGraphic extends Command
+class SyncPhpReleaseGraphic extends Command
 {
-    protected $signature = 'sync:php-version-graphic';
+    protected $signature = 'sync:php-release-graphic';
 
     protected $description = 'Fetch the most recent Version Support graphic from https://www.php.net/images/supported-versions.php';
 
