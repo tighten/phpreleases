@@ -1,0 +1,148 @@
+<?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 970 258" width="970" height="258">
+    <style type="text/css">
+        <![CDATA[
+			@import url(/fonts/Fira/fira.css);
+
+			text {
+				fill: #333;
+				font-family: "Fira Sans", "Source Sans Pro", Helvetica, Arial, sans-serif;
+				font-size: 16px;
+			}
+
+			g.eol rect,
+			.branches rect.eol {
+				fill: #f33;
+			}
+
+			g.eol text {
+				fill: white;
+			}
+
+			g.security rect,
+			.branches rect.security {
+				fill: #f93;
+			}
+
+			g.stable rect,
+			.branches rect.stable {
+				fill: #9c9;
+			}
+
+			.branch-labels text {
+				dominant-baseline: central;
+				text-anchor: middle;
+			}
+
+			.today line {
+				stroke: #f33;
+				stroke-dasharray: 7,7;
+				stroke-width: 3px;
+			}
+
+			.today text {
+				fill: #f33;
+				text-anchor: middle;
+			}
+
+			.years line {
+				stroke: black;
+			}
+
+			.years text {
+				text-anchor: middle;
+			}
+		]]>
+    </style>
+
+    <!-- Branch labels -->
+    <g class="branch-labels">
+        <g class="eol">
+            <rect x="0" y="24" width="40" height="30" />
+            <text x="20" y="39">
+                5.6				</text>
+        </g>
+        <g class="eol">
+            <rect x="0" y="54" width="40" height="30" />
+            <text x="20" y="69">
+                7.0				</text>
+        </g>
+        <g class="eol">
+            <rect x="0" y="84" width="40" height="30" />
+            <text x="20" y="99">
+                7.1				</text>
+        </g>
+        <g class="eol">
+            <rect x="0" y="114" width="40" height="30" />
+            <text x="20" y="129">
+                7.2				</text>
+        </g>
+        <g class="security">
+            <rect x="0" y="144" width="40" height="30" />
+            <text x="20" y="159">
+                7.3				</text>
+        </g>
+        <g class="stable">
+            <rect x="0" y="174" width="40" height="30" />
+            <text x="20" y="189">
+                7.4				</text>
+        </g>
+        <g class="stable">
+            <rect x="0" y="204" width="40" height="30" />
+            <text x="20" y="219">
+                8.0				</text>
+        </g>
+    </g>
+
+    <!-- Branch blocks -->
+    <g class="branches">
+        <rect class="stable" x="80" y="24" width="0" height="30" />
+        <rect class="security" x="80" y="24" width="119.59259664878" height="30" />
+        <rect class="stable" x="80" y="54" width="0.98565326908334" height="30" />
+        <rect class="security" x="80.985653269083" y="54" width="121.89245427664" height="30" />
+        <rect class="stable" x="80" y="84" width="109.73606395795" height="30" />
+        <rect class="security" x="189.73606395795" y="84" width="119.92114773847" height="30" />
+        <rect class="stable" x="80" y="114" width="229.32866060672" height="30" />
+        <rect class="security" x="309.32866060672" y="114" width="120.24969882817" height="30" />
+        <rect class="stable" x="191.37881940642" y="144" width="240.17084656664" height="30" />
+        <rect class="security" x="431.54966597306" y="144" width="119.92114773847" height="30" />
+        <rect class="stable" x="308.67155842734" y="174" width="240.17084656664" height="30" />
+        <rect class="security" x="548.84240499398" y="174" width="119.92114773847" height="30" />
+        <rect class="stable" x="428.26415507611" y="204" width="239.84229547695" height="30" />
+        <rect class="security" x="668.10645055306" y="204" width="119.92114773847" height="30" />
+    </g>
+
+    <!-- Year lines -->
+    <g class="years">
+        <line x1="80" y1="24" x2="80" y2="234" />
+        <text x="80" y="19.2">
+            1 Jan 2018			</text>
+        <line x1="199.92114773847" y1="24" x2="199.92114773847" y2="234" />
+        <text x="199.92114773847" y="19.2">
+            1 Jan 2019			</text>
+        <line x1="319.84229547695" y1="24" x2="319.84229547695" y2="234" />
+        <text x="319.84229547695" y="19.2">
+            1 Jan 2020			</text>
+        <line x1="440.09199430511" y1="24" x2="440.09199430511" y2="234" />
+        <text x="440.09199430511" y="19.2">
+            1 Jan 2021			</text>
+        <line x1="560.01314204359" y1="24" x2="560.01314204359" y2="234" />
+        <text x="560.01314204359" y="19.2">
+            1 Jan 2022			</text>
+        <line x1="679.93428978206" y1="24" x2="679.93428978206" y2="234" />
+        <text x="679.93428978206" y="19.2">
+            1 Jan 2023			</text>
+        <line x1="799.85543752053" y1="24" x2="799.85543752053" y2="234" />
+        <text x="799.85543752053" y="19.2">
+            1 Jan 2024			</text>
+        <line x1="920.1051363487" y1="24" x2="920.1051363487" y2="234" />
+        <text x="920.1051363487" y="19.2">
+            1 Jan 2025			</text>
+    </g>
+
+    <!-- Today -->
+    <g class="today">
+        <line x1="530.77209506078" y1="24" x2="530.77209506078" y2="234" />
+        <text x="530.77209506078" y="253.2">
+            Today: 4 Oct 2021		</text>
+    </g>
+</svg>

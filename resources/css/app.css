@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.markdown {
+    @apply text-gray-500;
+}
+
+.markdown > * {
+    @apply mt-4;
+}
+
+.markdown h3 {
+    @apply text-xl font-bold border-t-2 pt-8
+}
+
+.markdown h3 code, .markdown p code {
+    @apply text-xs bg-gray-700 text-white px-2 py-1 rounded
+}
+
+.markdown pre {
+    @apply text-xs bg-gray-800 p-6 rounded-lg mb-10 lg:max-w-screen-md
+}
+
+.markdown pre code {
+    @apply text-white
+}

@@ -17,7 +17,7 @@ class Release extends Model
         'security_support_until' => 'datetime',
     ];
 
-    protected $appends = ['needs_patch', 'needs_upgrade'];
+    protected $appends = ['needs_patch', 'needs_upgrade', 'changelog_url'];
 
     public function scopeLatestRelease($query)
     {
@@ -53,6 +53,11 @@ class Release extends Model
     public function getNeedsPatchAttribute()
     {
         return $this->attributes['needs_patch'] = $this->needs_upgrade || $this->release !== Release::latestReleaseForMinorVersion($this->major, $this->minor)->first()->release;
+    }
+
+    public function getChangelogUrlAttribute()
+    {
+        return  "https://www.php.net/ChangeLog-{$this->major}.php#{$this->__toString()}";
     }
 
     public function __toString()

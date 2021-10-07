@@ -292,4 +292,15 @@ class ReleaseControllerTest extends TestCase
         $this->getJson('api/releases/latest')
             ->assertJsonFragment([$latest->__toString()]);
     }
+
+    /** @test */
+    public function it_returns_the_expected_value_for_changelog_url()
+    {
+        $version = Version::factory()->create();
+
+        $this->assertSame(
+            "https://www.php.net/ChangeLog-{$version->major}.php#{$version->__toString()}",
+            $version->changelog_url
+        );
+    }
 }

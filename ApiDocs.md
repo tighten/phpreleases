@@ -1,14 +1,10 @@
-# PHP Releases API
+        The following endpoints are currently available:
 
-Provides API endpoints for support information for PHP major/minor versions and releases 5.6 and later.
+### GET `/api/versions`
 
+Returns all PHP versions 5.6+
 
-This is a Laravel-based application that leverages the GitHub Repositories API to stream release tags from the `php/php-src` repo. We are then parsing out old and irrelevant tags (ex: alpha, beta and release candidates) and storing them along with support dates.
-
-The following endpoints are currently available, along with the optional `/versions` route alias:
-- GET `/releases`: Returns all PHP releases 5.6+
-    <details>
-        <summary>Sample Response</summary>
+**Sample Response**
 
   ```json
     [{
@@ -50,16 +46,17 @@ The following endpoints are currently available, along with the optional `/versi
       "created_at": "2021-09-10T17:53:23.000000Z",
       "updated_at": "2021-09-10T17:53:23.000000Z",
       "needs_patch": true,
-      "needs_upgrade": false,
+      "needs_upgrade": false, 
       "changelog_url": "https://www.php.net/ChangeLog-8.php#8.0.8"
     }, ...]
-    ```
-</details>
+```
 
-- GET `/releases/:release`: Returns information for the major/minor/release level requested. For specific releases (ex: 8.0.10), you will receive additional data for `needs_patch`, `needs_upgrade`, and `latest_release`.
-  <details>
-        <summary>Sample Response</summary>
-  
+### GET `/api/versions/:version`
+
+Returns information for the major/minor/release level version requested. For specific releases (ex: 8.0.10), you will receive additional data for `needs_patch`, `needs_upgrade`, and `latest_release`.
+
+**Sample Response**
+
   ```json
   {
     "provided": {
@@ -78,20 +75,24 @@ The following endpoints are currently available, along with the optional `/versi
     },
     "latest_release": "8.0.10"
   }
-    ```
-  </details>
-- GET `/releases/latest`: Returns a string value of the latest release of the highest major release
-  <details>
-  <summary>Sample Response</summary>
+```
+
+### GET `/api/versions/latest`
+
+Returns a string value of the latest release of the highest major version
+
+**Sample Response**
 
   ```
   "8.0.10"
-    ```
-    </details>
-- GET `/releases/minimum-supported/:support-type`: Takes a string `active` or `security` and returns the minimum release supported
-    <details>
-        <summary>Sample Response</summary>
-  
+```
+
+### GET `/api/versions/minimum-supported/:support-type`
+
+Takes a string `active` or `security` and returns the minimum version supported
+
+**Sample Response**
+
   ```json
   {
     "id": 2,
@@ -107,19 +108,4 @@ The following endpoints are currently available, along with the optional `/versi
     "needs_upgrade": false,
     "changelog_url": "https://www.php.net/ChangeLog-7.php#7.4.23"
   }
-    ```
-</details>
-
-
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Support us
-
-Tighten is a web development firm that works in Laravel, Vue, and React. You can learn more about us on our [web site](https://tighten.co/).
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+```
