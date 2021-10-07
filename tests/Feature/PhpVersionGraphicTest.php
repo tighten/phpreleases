@@ -26,7 +26,6 @@ class PhpVersionGraphicTest extends TestCase
     /** @test */
     public function it_does_not_store_html_response_from_php_net()
     {
-        // If for some reason php.net
         Storage::fake('public');
 
         Log::shouldReceive('warning')
@@ -54,20 +53,11 @@ class PhpVersionGraphicTest extends TestCase
         $this->artisan('sync:php-version-graphic');
 
         Storage::disk('public')->assertExists('supported-versions.svg');
+        $lastModified = Storage::disk('public')->lastModified('supported-versions.svg');
 
-        // Run the command again. Since there is no change, we should get an error code
-        $this->artisan('sync:php-version-graphic')
-            ->assertExitCode(1);
-    }
+        sleep(2);
+        $this->artisan('sync:php-version-graphic');
 
-    /** @test */
-    public function it_checks_that_the_file_exists()
-    {
-        Storage::fake('public');
-
-        Storage::disk('public')->assertMissing('supported-versions.svg');
-
-        $this->get('/')
-            ->assertViewHas(['showGraphic' => false]);
+        $this->assertSame($lastModified, Storage::disk('public')->lastModified('supported-versions.svg'));
     }
 }

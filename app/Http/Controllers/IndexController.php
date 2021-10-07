@@ -9,7 +9,7 @@ class IndexController
 {
     public function index()
     {
-        return view('index', ['showGraphic' => $this->graphicHasBeenUpdatedToday()]);
+        return view('index', ['graphicUpdatedToday' => $this->graphicHasBeenUpdatedToday()]);
     }
 
     public function graphicHasBeenUpdatedToday(): bool

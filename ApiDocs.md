@@ -18,7 +18,8 @@ Returns all PHP versions 5.6+
       "created_at": "2021-09-10T17:53:23.000000Z",
       "updated_at": "2021-09-10T17:53:23.000000Z",
       "needs_patch": false,
-      "needs_upgrade": false
+      "needs_upgrade": false,
+      "changelog_url": "https://www.php.net/ChangeLog-8.php#8.0.10"
     },
     {
       "id": 4,
@@ -31,7 +32,8 @@ Returns all PHP versions 5.6+
       "created_at": "2021-09-10T17:53:23.000000Z",
       "updated_at": "2021-09-10T17:53:23.000000Z",
       "needs_patch": true,
-      "needs_upgrade": false
+      "needs_upgrade": false,
+      "changelog_url": "https://www.php.net/ChangeLog-8.php#8.0.9"
     },
     {
       "id": 6,
@@ -44,7 +46,8 @@ Returns all PHP versions 5.6+
       "created_at": "2021-09-10T17:53:23.000000Z",
       "updated_at": "2021-09-10T17:53:23.000000Z",
       "needs_patch": true,
-      "needs_upgrade": false
+      "needs_upgrade": false, 
+      "changelog_url": "https://www.php.net/ChangeLog-8.php#8.0.8"
     }, ...]
 ```
 
@@ -67,7 +70,8 @@ Returns information for the major/minor/release level version requested. For spe
       "created_at": "2021-09-10T17:53:24.000000Z",
       "updated_at": "2021-09-10T17:53:24.000000Z",
       "needs_patch": true,
-      "needs_upgrade": true
+      "needs_upgrade": true,
+      "changelog_url": "https://www.php.net/ChangeLog-7.php#7.3.3"
     },
     "latest_release": "8.0.10"
   }
@@ -101,6 +105,7 @@ Takes a string `active` or `security` and returns the minimum version supported
     "created_at": "2021-09-10T17:53:23.000000Z",
     "updated_at": "2021-09-10T17:53:23.000000Z",
     "needs_patch": false,
-    "needs_upgrade": false
+    "needs_upgrade": false,
+    "changelog_url": "https://www.php.net/ChangeLog-7.php#7.4.23"
   }
 ```
