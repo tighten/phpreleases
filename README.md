@@ -6,7 +6,7 @@ Provides API endpoints for support information for PHP major/minor versions and 
 This is a Laravel-based application that leverages the GitHub Repositories API to stream release tags from the `php/php-src` repo. We are then parsing out old and irrelevant tags (ex: alpha, beta and release candidates) and storing them along with support dates.
 
 The following endpoints are currently available, along with the optional `/versions` route alias:
-- GET `/releases`: Returns all PHP releases 5.6+
+- GET `/releases`: Returns all PHP releases 5.6+.
     <details>
         <summary>Sample Response</summary>
 
@@ -80,7 +80,7 @@ The following endpoints are currently available, along with the optional `/versi
   }
     ```
   </details>
-- GET `/releases/latest`: Returns a string value of the latest release of the highest major release
+- GET `/releases/latest`: Returns a string value of the latest release of the highest major release.
   <details>
   <summary>Sample Response</summary>
 
@@ -88,7 +88,7 @@ The following endpoints are currently available, along with the optional `/versi
   "8.0.10"
     ```
     </details>
-- GET `/releases/minimum-supported/:support-type`: Takes a string `active` or `security` and returns the minimum release supported
+- GET `/releases/minimum-supported/:support-type`: Takes a string `active` or `security` and returns the minimum release supported.
     <details>
         <summary>Sample Response</summary>
   

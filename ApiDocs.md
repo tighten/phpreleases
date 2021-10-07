@@ -2,7 +2,7 @@ The following endpoints are currently available, along with the optional `/versi
 
 ### GET `/api/releases`
 
-Returns all PHP releases 5.6+
+Returns all PHP releases 5.6+.
 
 **Sample Response**
 
@@ -79,7 +79,7 @@ Takes string (ex: "7", "7.2", "7.2.12") and returns information for the major/mi
 
 ### GET `/api/releases/latest`
 
-Returns a string value of the latest release of the highest major version
+Returns a string value of the latest release of the highest major version.
 
 **Sample Response**
 
@@ -89,7 +89,7 @@ Returns a string value of the latest release of the highest major version
 
 ### GET `/api/releases/minimum-supported/:support-type`
 
-Takes a string `active` or `security` and returns the minimum release supported
+Takes a string `active` or `security` and returns the minimum release supported.
 
 **Sample Response**
 
