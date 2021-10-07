@@ -12,25 +12,10 @@ use Illuminate\Support\Str;
 
 class SyncPhpVersions extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'sync:php-versions';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Pull PHP versions from GitHub into our application.';
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
     public function handle()
     {
         Log::info('Syncing PHP Versions');
