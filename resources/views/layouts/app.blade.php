@@ -20,7 +20,10 @@
 </head>
 <body>
     <div>
-        <div class="bg-white max-w-2xl mx-auto py-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid-cols-2">
+
+        @include('partials.header')
+
+        <div class="bg-white max-w-2xl mx-auto py-14 px-4 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid-cols-2">
             <div>
                 @yield('content')
             </div>
