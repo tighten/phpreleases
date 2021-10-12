@@ -4,7 +4,7 @@
         <div class="mb-2 mt-4 text-3xl">
             <a href="/" class="inline-block">
                 <!--img class="w-full h-full" src="/svg/logo.svg" style="width: 295px;" alt="PHP Releases"-->
-                <h2 class="text-3xl tracking-tight text-white sm:text-4xl">
+                <h2 class="text-3xl font-mono text-white sm:text-4xl">
                     PHP Releases
                 </h2>
             </a>
