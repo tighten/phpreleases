@@ -19,7 +19,7 @@
 }
 
 .markdown pre {
-    @apply text-xs bg-gray-800 p-6 rounded-lg mb-10 lg:max-w-screen-md
+    @apply text-xs bg-gray-700 p-6 rounded-lg mb-10 lg:max-w-screen-md
 }
 
 .markdown pre code {
