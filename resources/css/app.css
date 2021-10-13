@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.schedule-wrapper svg {
+    max-width: 100%;
+    height: auto;
+}
+
 .markdown {
     @apply text-gray-500;
 }

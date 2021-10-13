@@ -13,7 +13,9 @@
         <span class="text-xs ml-2 text-gray-600">From <a href="https://www.php.net/supported-versions.php" class="text-indigo-700 hover:text-indigo-900 underline">php.net</a></span>
     </h3>
 
-    {!! Storage::disk('public')->get('supported-versions.svg') !!}
+    <div class="schedule-wrapper">
+        {!! Storage::disk('public')->get('supported-versions.svg') !!}
+    </div>
 
     @if (! $graphicUpdatedToday)
         <p class="text-xs ml-2 text-gray-600">Graphic updated {{ Carbon\Carbon::createFromTimestamp(Storage::disk('public')->lastModified('supported-versions.svg'))->toDateTimeString() }}</p>
