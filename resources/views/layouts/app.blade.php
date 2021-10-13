@@ -8,13 +8,20 @@
     <meta name="description" content="API endpoints with support information for PHP versions 5.6 and later.">
     <meta property="og:title" content="PHP Releases | Tighten">
     <meta property="og:description" content="API endpoints with support information for PHP versions 5.6 and later.">
-    <meta property="og:image" content="{{ config('app.url') . '/images/tighten-og-cover.png' }}">
+    <meta property="og:image" content="{{ config('app.url') . '/images/phpreleases-cover.png' }}">
     <meta property="og:url" content="{{ config('app.url') }}">
     <meta property="og:site_name" content="PHP Releases">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:width" content="1200">
+
+    <meta name="twitter:title" content="PHP Releases">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@TightenCo">
     <meta name="twitter:image:alt" content="Tighten logo">
-
+    <meta name="twitter:description" content="API endpoints with support information for PHP versions 5.6 and later.">
+    <meta property="og:image" content="{{ config('app.url') . '/images/phpreleases-cover.png' }}">
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
