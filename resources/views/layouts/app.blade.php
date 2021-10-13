@@ -39,5 +39,8 @@
     <div class="bg-gray-100 text-gray-800 flex justify-center py-8">
         <div>Brought to you by the lovely folks at <a href="https://tighten.co/" class="text-indigo-700 hover:text-indigo-900 underline">Tighten</a>.</div>
     </div>
+
+    @include('scripts')
 </body>
 </html>
+

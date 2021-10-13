@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
          $schedule->command(SyncPhpReleases::class)->twiceDaily(1, 13);
-         $schedule->command(SyncPhpReleaseGraphic::class)->hourlyAt(22);
+         $schedule->command(SyncPhpReleaseGraphic::class)->daily();
     }
 
     /**
