@@ -1,5 +1,8 @@
 # PHP Releases API
 
+[![GitHub Actions Status](https://img.shields.io/github/workflow/status/tighten/phpreleases/test?label=tests&style=flat)](https://github.com/tighten/phpreleases/actions?query=workflow:tests+branch:main)
+
+
 Provides API endpoints for support information for PHP major/minor versions and releases 5.6 and later.
 
 

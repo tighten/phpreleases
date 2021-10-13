@@ -2,7 +2,21 @@
     "name": "tighten/phpreleases",
     "type": "project",
     "description": "PHP Releases API.",
+    "keywords": ["php", "php releases", "php versions","tighten"],
+    "homepage": "https://phpreleases.com",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Alison Kirk",
+            "homepage": "https://tighten.co",
+            "role": "Developer"
+        },
+        {
+            "name": "Matt Stauffer",
+            "homepage": "https://tighten.co",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^7.4|^8.0",
         "fruitcake/laravel-cors": "^2.0",
