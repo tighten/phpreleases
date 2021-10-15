@@ -1,6 +1,9 @@
 const colors = require('tailwindcss/colors');
 
 module.exports = {
+  corePlugins: {
+      overflow: true
+  },
   purge: [
     './resources/**/*.blade.php',
   ],
