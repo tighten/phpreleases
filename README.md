@@ -1,6 +1,6 @@
 # PHP Releases API
 
-[![GitHub Actions Status](https://github.com/tighten/phpreleases/actions/workflows/tests/badge.svg)
+![GitHub Actions Status](https://github.com/tighten/phpreleases/actions/workflows/tests.yml/badge.svg)
 
 
 Provides API endpoints for support information for PHP major/minor versions and releases 5.6 and later.
