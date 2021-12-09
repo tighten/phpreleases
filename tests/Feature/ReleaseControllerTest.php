@@ -303,4 +303,25 @@ class ReleaseControllerTest extends TestCase
             $release->changelog_url
         );
     }
+
+    /** @test */
+    public function it_sorts_correctly()
+    {
+        Release::factory()
+            ->count(5)
+            ->sequence(fn ($sequence) => [
+                'major' => 8,
+                'minor' => $sequence->index,
+                'tagged_at' => CarbonImmutable::today()->addDays($sequence->index),
+            ])
+            ->create();
+
+        $response = $this->get('api/releases/8')
+            ->assertJsonCount(5);
+
+        //the first should be 8.0
+        $this->assertEquals(4, $response[0]['minor']);
+        //the final should be 8.4
+        $this->assertEquals(0, $response[4]['minor']);
+    }
 }
