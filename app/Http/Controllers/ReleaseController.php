@@ -11,10 +11,7 @@ class ReleaseController
     public function index()
     {
         return response()->json(
-            Release::orderByDesc('major')
-                ->orderByDesc('minor')
-                ->orderByDesc('release')
-                ->get()
+            Release::orderByDesc('tagged_at')->get()
         );
     }
 
@@ -68,6 +65,7 @@ class ReleaseController
                 ->when(array_key_exists(0, $release), function ($query) use ($release) {
                     $query->where('major', $release[0]);
                 })
+                ->orderByDesc('tagged_at')
                 ->get()
         );
     }
