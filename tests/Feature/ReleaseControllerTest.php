@@ -58,9 +58,9 @@ class ReleaseControllerTest extends TestCase
 
         $this->getJson('api/releases/minimum-supported/security')
             ->assertJsonFragment([
-                'major' => '7',
-                'minor' => '3',
-                'release' => '2',
+                'major' => 7,
+                'minor' => 3,
+                'release' => 2,
             ]);
     }
 
@@ -103,9 +103,9 @@ class ReleaseControllerTest extends TestCase
 
         $this->getJson('api/releases/minimum-supported/active')
             ->assertJsonFragment([
-                'major' => '7',
-                'minor' => '4',
-                'release' => '2',
+                'major' => 7,
+                'minor' => 4,
+                'release' => 2,
             ]);
     }
 
@@ -120,9 +120,9 @@ class ReleaseControllerTest extends TestCase
 
         $this->getJson('api/releases/' . phpversion('tidy'))
             ->assertJsonFragment([
-                'major' => (string) $currentRelease->major,
-                'minor' => (string) $currentRelease->minor,
-                'release' => (string) $currentRelease->release,
+                'major' => $currentRelease->major,
+                'minor' => $currentRelease->minor,
+                'release' => $currentRelease->release,
                 'tagged_at' => $currentRelease->tagged_at,
                 'active_support_until' => $currentRelease->active_support_until,
                 'security_support_until' => $currentRelease->security_support_until,
@@ -207,9 +207,9 @@ class ReleaseControllerTest extends TestCase
 
         $latest = Release::latestRelease()->first();
 
-        $this->assertSame('8', $latest->major);
-        $this->assertSame('1', $latest->minor);
-        $this->assertSame('1', $latest->release);
+        $this->assertSame(8, $latest->major);
+        $this->assertSame(1, $latest->minor);
+        $this->assertSame(1, $latest->release);
     }
 
     /** @test */
