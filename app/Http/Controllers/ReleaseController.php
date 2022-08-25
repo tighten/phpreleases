@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ReleaseResource;
 use App\Models\Release;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -10,14 +11,12 @@ class ReleaseController
 {
     public function index()
     {
-        return response()->json(
-            Release::orderByDesc('tagged_at')->get()
-        );
+        return ReleaseResource::collection(Release::orderByDesc('tagged_at')->get());
     }
 
     public function minimumSupported(string $supportType = 'active')
     {
-        return response()->json(
+        return new ReleaseResource(
             Release::where("{$supportType}_support_until", '>', Carbon::now())
                 ->orderBy('major')
                 ->orderBy('minor')
@@ -47,16 +46,10 @@ class ReleaseController
                 'release' => $release[2],
             ]);
 
-            return response()->json([
-                'provided' => $provided,
-                'latest_release' => (string) Release::orderByDesc('major')
-                    ->orderByDesc('minor')
-                    ->orderByDesc('release')
-                    ->first(),
-            ]);
+            return new ReleaseResource($provided);
         }
 
-        return response()->json(
+        return ReleaseResource::collection(
             Release::query()
                 ->when(array_key_exists(1, $release), function ($query) use ($release) {
                     $query->where('major', $release[0])
