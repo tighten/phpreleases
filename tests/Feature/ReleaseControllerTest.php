@@ -119,6 +119,20 @@ class ReleaseControllerTest extends TestCase
         ]);
 
         $this->getJson('api/releases/' . phpversion('tidy'))
+            ->assertJsonStructure([
+                'provided' => [
+                    'major',
+                    'minor',
+                    'release',
+                    'tagged_at',
+                    'active_support_until',
+                    'security_support_until',
+                    'needs_patch',
+                    'needs_upgrade',
+                    'changelog_url',
+                ],
+                'latest_release',
+            ])
             ->assertJsonFragment([
                 'major' => $currentRelease->major,
                 'minor' => $currentRelease->minor,
@@ -149,6 +163,19 @@ class ReleaseControllerTest extends TestCase
             ->create();
 
         $this->getJson('api/releases/8')
+            ->assertJsonStructure([
+                '*' => [
+                    'major',
+                    'minor',
+                    'release',
+                    'tagged_at',
+                    'active_support_until',
+                    'security_support_until',
+                    'needs_patch',
+                    'needs_upgrade',
+                    'changelog_url',
+                ],
+            ])
             ->assertJsonCount(5);
 
         $this->getJson('api/releases/7')
