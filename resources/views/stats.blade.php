@@ -30,7 +30,7 @@
         </div>
 
         <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
-            <dt class="text-sm font-medium text-gray-500 truncate">Top endpoint</dt>
+            <dt class="text-sm font-medium text-gray-500 truncate">Top Endpoints</dt>
             <dd class="mt-1 text-xs tracking-tight font-semibold text-gray-900">
                 @foreach ($top as $key => $value)
                     <div class="flex justify-between my-2">
@@ -43,7 +43,7 @@
     </dl>
 
 
-    <table class="min-w-full divide-y divide-gray-300">
+    <table class="min-w-full divide-y divide-gray-300 mt-4">
         <thead class="bg-gray-50">
             <tr>
                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Endpoint</th>
