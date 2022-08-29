@@ -12,7 +12,14 @@ class Hit extends Model
 
     protected $fillable = ['endpoint', 'user_agent'];
 
-    public static function forTimePeriod(string $period = 'week')
+    /**
+     * @param string $period    Available Options: millenium, century, decade,
+     *                          year, quarter, month, week, day, weekday, hour,
+     *                          minute, second, microsecond
+     *
+     * @return array
+     */
+    public static function forTimePeriod(string $period = 'week'): array
     {
         $now = CarbonImmutable::now();
 
@@ -22,7 +29,7 @@ class Hit extends Model
         return [
             'current' => $currentPeriodHits,
             'previous' => $previousPeriodHits,
-            'change' => $previousPeriodHits
+            'changePercent' => $previousPeriodHits
                 ? intval((($currentPeriodHits - $previousPeriodHits) / $previousPeriodHits) * 100)
                 : 100,
         ];

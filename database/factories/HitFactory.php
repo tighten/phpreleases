@@ -9,7 +9,7 @@ class HitFactory extends Factory
     public function definition()
     {
         return [
-            'endpoint' => '/api/releases/8.0',
+            'endpoint' => '/api/releases/' . random_int(5, 9) . '.' . random_int(0, 12) . random_int(0, 25),
             'user_agent' => $this->faker->userAgent,
         ];
     }

@@ -57,7 +57,7 @@ class StatsTest extends TestCase
         $this->assertSame([
             'current' => 6,
             'previous' => 2,
-            'change' => 200,
+            'changePercent' => 200,
         ], $hits);
     }
 
@@ -81,7 +81,7 @@ class StatsTest extends TestCase
         $this->assertSame([
             'current' => 2,
             'previous' => 6,
-            'change' => -66,
+            'changePercent' => -66,
         ], $hits);
     }
 
@@ -99,7 +99,7 @@ class StatsTest extends TestCase
         $this->assertSame([
             'current' => 2,
             'previous' => 0,
-            'change' => 100,
+            'changePercent' => 100,
         ], $hits);
     }
 }

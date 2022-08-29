@@ -7,7 +7,7 @@
             <dd class="mt-1 text-3xl tracking-tight font-semibold text-gray-900">
                 <h3>{{ $week['current'] }} hits</h3>
                 <p class="text-gray-500 text-sm">Previous: {{ $week['previous'] }}</p>
-                <p class="text-gray-500 text-sm">Percent Change: {{ $week['change'] }}%</p>
+                <p class="text-gray-500 text-sm">Percent Change: {{ $week['changePercent'] }}%</p>
             </dd>
         </div>
 
@@ -16,7 +16,7 @@
             <dd class="mt-1 text-3xl tracking-tight font-semibold text-gray-900">
                 <h3>{{ $month['current'] }} hits</h3>
                 <p class="text-gray-500 text-sm">Previous: {{ $month['previous'] }}</p>
-                <p class="text-gray-500 text-sm">Percent Change: {{ $month['change'] }}%</p>
+                <p class="text-gray-500 text-sm">Percent Change: {{ $month['changePercent'] }}%</p>
             </dd>
         </div>
 
@@ -25,17 +25,17 @@
             <dd class="mt-1 text-3xl tracking-tight font-semibold text-gray-900">
                 <h3>{{ $year['current'] }} hits</h3>
                 <p class="text-gray-500 text-sm">Previous: {{ $year['previous'] }}</p>
-                <p class="text-gray-500 text-sm">Percent Change: {{ $year['change'] }}%</p>
+                <p class="text-gray-500 text-sm">Percent Change: {{ $year['changePercent'] }}%</p>
             </dd>
         </div>
 
         <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
-            <dt class="text-sm font-medium text-gray-500 truncate">Top Endpoints</dt>
+            <dt class="text-sm font-medium text-gray-500 truncate">Top Endpoints <span class="text-xs">(All Time)</span></dt>
             <dd class="mt-1 text-xs tracking-tight font-semibold text-gray-900">
-                @foreach ($top as $key => $value)
+                @foreach ($top as $topHit)
                     <div class="flex justify-between my-2">
-                        <p>{{ $key }}</p>
-                        <p>{{ $value }}</p>
+                        <p>{{ $topHit->endpoint }}</p>
+                        <p>{{ $topHit->count }}</p>
                     </div>
                 @endforeach
             </dd>
@@ -61,4 +61,6 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $hits->links() }}
 @endsection
