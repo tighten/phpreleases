@@ -20,12 +20,6 @@ class HitController
                 ->orderByDesc('count')
                 ->take(5)
                 ->get(),
-
-//            'top' => Hit::all()->countBy(function ($item) {
-//                return $item->endpoint;
-//            })->sortBy(function ($key, $value) {
-//                return $value;
-//            })->take(5),
         ]);
     }
 }
