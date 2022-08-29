@@ -58,9 +58,9 @@ class ReleaseControllerTest extends TestCase
 
         $this->getJson('api/releases/minimum-supported/security')
             ->assertJsonFragment([
-                'major' => '7',
-                'minor' => '3',
-                'release' => '2',
+                'major' => 7,
+                'minor' => 3,
+                'release' => 2,
             ]);
     }
 
@@ -103,9 +103,9 @@ class ReleaseControllerTest extends TestCase
 
         $this->getJson('api/releases/minimum-supported/active')
             ->assertJsonFragment([
-                'major' => '7',
-                'minor' => '4',
-                'release' => '2',
+                'major' => 7,
+                'minor' => 4,
+                'release' => 2,
             ]);
     }
 
@@ -119,10 +119,24 @@ class ReleaseControllerTest extends TestCase
         ]);
 
         $this->getJson('api/releases/' . phpversion('tidy'))
+            ->assertJsonStructure([
+                'provided' => [
+                    'major',
+                    'minor',
+                    'release',
+                    'tagged_at',
+                    'active_support_until',
+                    'security_support_until',
+                    'needs_patch',
+                    'needs_upgrade',
+                    'changelog_url',
+                ],
+                'latest_release',
+            ])
             ->assertJsonFragment([
-                'major' => (string) $currentRelease->major,
-                'minor' => (string) $currentRelease->minor,
-                'release' => (string) $currentRelease->release,
+                'major' => $currentRelease->major,
+                'minor' => $currentRelease->minor,
+                'release' => $currentRelease->release,
                 'tagged_at' => $currentRelease->tagged_at,
                 'active_support_until' => $currentRelease->active_support_until,
                 'security_support_until' => $currentRelease->security_support_until,
@@ -149,6 +163,19 @@ class ReleaseControllerTest extends TestCase
             ->create();
 
         $this->getJson('api/releases/8')
+            ->assertJsonStructure([
+                '*' => [
+                    'major',
+                    'minor',
+                    'release',
+                    'tagged_at',
+                    'active_support_until',
+                    'security_support_until',
+                    'needs_patch',
+                    'needs_upgrade',
+                    'changelog_url',
+                ],
+            ])
             ->assertJsonCount(5);
 
         $this->getJson('api/releases/7')
@@ -207,9 +234,9 @@ class ReleaseControllerTest extends TestCase
 
         $latest = Release::latestRelease()->first();
 
-        $this->assertSame('8', $latest->major);
-        $this->assertSame('1', $latest->minor);
-        $this->assertSame('1', $latest->release);
+        $this->assertSame(8, $latest->major);
+        $this->assertSame(1, $latest->minor);
+        $this->assertSame(1, $latest->release);
     }
 
     /** @test */
@@ -323,5 +350,31 @@ class ReleaseControllerTest extends TestCase
         $this->assertEquals(4, $response[0]['minor']);
         //the final should be 8.4
         $this->assertEquals(0, $response[4]['minor']);
+    }
+
+    /** @test */
+    public function it_validates_the_support_type()
+    {
+        $this->getJson('api/releases/minimum-supported/' . 'foo')
+            ->assertJsonValidationErrors('supportType');
+    }
+
+    /** @test */
+    public function it_validates_the_version_param()
+    {
+        Release::factory()->create([
+            'major' => 10,
+            'minor' => 9,
+            'release' => 0,
+        ]);
+
+        $this->getJson('api/releases/' . 'string')
+            ->assertJsonValidationErrors('major');
+
+        $this->getJson('api/releases/10.' . 'string')
+            ->assertJsonValidationErrors('minor');
+
+        $this->getJson('api/releases/10.9.' . 'string')
+            ->assertJsonValidationErrors('release');
     }
 }
