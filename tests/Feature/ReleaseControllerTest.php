@@ -351,4 +351,30 @@ class ReleaseControllerTest extends TestCase
         //the final should be 8.4
         $this->assertEquals(0, $response[4]['minor']);
     }
+
+    /** @test */
+    public function it_validates_the_support_type()
+    {
+        $this->getJson('api/releases/minimum-supported/' . 'foo')
+            ->assertJsonValidationErrors('supportType');
+    }
+
+    /** @test */
+    public function it_validates_the_version_param()
+    {
+        Release::factory()->create([
+            'major' => 10,
+            'minor' => 9,
+            'release' => 0,
+        ]);
+
+        $this->getJson('api/releases/' . 'string')
+            ->assertJsonValidationErrors('major');
+
+        $this->getJson('api/releases/10.' . 'string')
+            ->assertJsonValidationErrors('minor');
+
+        $this->getJson('api/releases/10.9.' . 'string')
+            ->assertJsonValidationErrors('release');
+    }
 }
