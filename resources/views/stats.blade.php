@@ -5,7 +5,7 @@
         <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt class="text-sm font-medium text-gray-500 truncate">Last Week</dt>
             <dd class="mt-1 text-3xl tracking-tight font-semibold text-gray-900">
-                <h3>{{ $week['current']}} hits</h3>
+                <h3>{{ $week['current'] }} hits</h3>
                 <p class="text-gray-500 text-sm">Previous: {{ $week['previous'] }}</p>
                 <p class="text-gray-500 text-sm">Percent Change: {{ $week['change'] }}%</p>
             </dd>
@@ -14,7 +14,7 @@
         <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt class="text-sm font-medium text-gray-500 truncate">Last Month</dt>
             <dd class="mt-1 text-3xl tracking-tight font-semibold text-gray-900">
-                <h3>{{ $month['current']}} hits</h3>
+                <h3>{{ $month['current'] }} hits</h3>
                 <p class="text-gray-500 text-sm">Previous: {{ $month['previous'] }}</p>
                 <p class="text-gray-500 text-sm">Percent Change: {{ $month['change'] }}%</p>
             </dd>
@@ -23,7 +23,7 @@
         <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt class="text-sm font-medium text-gray-500 truncate">All Time</dt>
             <dd class="mt-1 text-3xl tracking-tight font-semibold text-gray-900">
-                <h3>{{ $year['current']}} hits</h3>
+                <h3>{{ $year['current'] }} hits</h3>
                 <p class="text-gray-500 text-sm">Previous: {{ $year['previous'] }}</p>
                 <p class="text-gray-500 text-sm">Percent Change: {{ $year['change'] }}%</p>
             </dd>
@@ -32,7 +32,7 @@
         <div class="px-4 py-5 bg-white shadow rounded-lg overflow-hidden sm:p-6">
             <dt class="text-sm font-medium text-gray-500 truncate">Top endpoint</dt>
             <dd class="mt-1 text-xs tracking-tight font-semibold text-gray-900">
-                @foreach($top as $key => $value)
+                @foreach ($top as $key => $value)
                     <div class="flex justify-between my-2">
                         <p>{{ $key }}</p>
                         <p>{{ $value }}</p>
@@ -52,11 +52,11 @@
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-200 bg-white">
-            @foreach($hits as $hit)
+            @foreach ($hits as $hit)
                 <tr>
-                    <td class="whitespace-nowrap py-4 pl-4 text-sm text-gray-500">{{ $hit->endpoint}}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $hit->user_agent}}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $hit->created_at}}</td>
+                    <td class="whitespace-nowrap py-4 pl-4 text-sm text-gray-500">{{ $hit->endpoint }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $hit->user_agent }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $hit->created_at }}</td>
                 </tr>
             @endforeach
         </tbody>

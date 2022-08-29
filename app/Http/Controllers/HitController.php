@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hit;
-use Illuminate\Support\Facades\DB;
 
 class HitController
 {
@@ -18,7 +17,7 @@ class HitController
             'year' => Hit::forTimePeriod('year'),
             'top' => $stats->countBy(function ($item) {
                 return $item->endpoint;
-            })->sortBy(function($key, $value) {
+            })->sortBy(function ($key, $value) {
                 return $value;
             })->take(5),
         ]);

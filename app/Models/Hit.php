@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -33,7 +32,7 @@ class Hit extends Model
     {
         return Hit::whereBetween('created_at', [
             $start->toDateTimeString(),
-            $end->toDateTimeString()
+            $end->toDateTimeString(),
         ])->count();
     }
 }

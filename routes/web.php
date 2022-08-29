@@ -18,5 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IndexController::class, 'index']);
 
 Route::middleware('auth.basic')
-    ->get('stats', HitController::class )
+    ->get('stats', HitController::class)
     ->name('stats');
