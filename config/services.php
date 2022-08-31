@@ -34,4 +34,8 @@ return [
         'token' => env('GITHUB_TOKEN'),
     ],
 
+    'slack' => [
+        'webhook' => env('SLACK_WEBHOOK_URL'),
+    ],
+
 ];
