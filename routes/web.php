@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HitController;
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [IndexController::class, 'index']);
+
+Route::middleware('auth.basic')
+    ->get('stats', HitController::class)
+    ->name('stats');
