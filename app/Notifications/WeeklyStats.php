@@ -4,8 +4,8 @@ namespace App\Notifications;
 
 use App\Models\Hit;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use NathanHeffley\LaravelSlackBlocks\Messages\SlackMessage;
 
 class WeeklyStats extends Notification
 {
@@ -20,17 +20,44 @@ class WeeklyStats extends Notification
     {
         $hits = Hit::forTimePeriod('week');
 
-        $message = (new SlackMessage())
-            ->attachment(function ($attachment) use ($hits) {
-                $attachment->title('PHP Releases Weekly Hits!')
-                    ->content(
-                        "*Current Period*: {$hits['current']} \n *Previous Period*: {$hits['previous']} \n *Change*: {$hits['changePercent']}%"
-                    )
-                    ->markdown(['text']);
-            });
+        return (new SlackMessage())
+            ->block(function ($block) use ($hits) {
+                $block->type('header')
+                    ->text([
+                        'type' => 'plain_text',
+                        'text' => 'PHP Releases Weekly Hits!',
+                    ]);
+            })
+            ->block(function ($block) use ($hits) {
+                $block->type('section')
+                    ->fields([
+                        [
+                            'type' => 'mrkdwn',
+                            'text' => "*Current Period:*\n{$hits['current']}",
+                        ],
+                        [
+                            'type' => 'mrkdwn',
+                            'text' => "*Previous Period:*\n{$hits['previous']}",
+                        ],
+                    ]);
+            })
+            ->block(function ($block) use ($hits) {
+                $emoji = $hits['changePercent'] > 0 ? ':arrow_up:' : ':arrow_down:';
 
-        return $hits['changePercent'] >= 0
-            ? $message->success()
-            : $message->warning();
+                $block->type('section')
+                    ->fields([
+                        [
+                            'type' => 'mrkdwn',
+                            'text' => "*Change:*\n{$emoji} {$hits['changePercent']}%",
+                        ],
+                    ]);
+            })
+            ->block(function ($block) use ($hits) {
+                $block->type('section')
+                    ->text([
+                        'type' => 'mrkdwn',
+                        'text' => 'See more detail at :link:phpreleases.com/stats',
+                    ]);
+            });
     }
 }

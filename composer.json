@@ -24,6 +24,7 @@
         "laravel/framework": "^8.54",
         "laravel/slack-notification-channel": "^2.4",
         "laravel/tinker": "^2.5",
+        "nathanheffley/laravel-slack-blocks": "^2.3",
         "stevegrunwell/time-constants": "^1.1",
         "tightenco/duster": "^0.3.2"
     },
