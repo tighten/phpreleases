@@ -19,8 +19,8 @@ class RecordHit
         $userAgent = $request->header('user-agent');
 
         if (
-            $uri === '/'
-            || explode('/', $uri)[1] === 'api'
+            ($uri === '/'
+            || explode('/', $uri)[1] === 'api')
             && ! str_contains(strtolower($userAgent), 'bot')
             && ! str_contains(strtolower($userAgent), 'spider')
         ) {

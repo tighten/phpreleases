@@ -27,13 +27,13 @@ class StatsTest extends TestCase
     /** @test */
     public function it_ignores_bot_user_agents()
     {
-        $this->getJson('api/releases/8.0.0', [
-            'User-Agent' => 'Mybot',
+        $this->getJson('/', [
+            'User-Agent' => 'Mozilla/5.0 (compatible; DuckDuckGo-Favicons-Bot/1.0; +http://duckduckgo.com)',
         ]);
 
         $this->assertDatabaseMissing('hits', [
-            'endpoint' => '/api/releases/8.0.0',
-            'user_agent' => 'Mybot',
+            'endpoint' => '/',
+            'user_agent' => 'Mozilla/5.0 (compatible; DuckDuckGo-Favicons-Bot/1.0; +http://duckduckgo.com)',
         ]);
     }
 
