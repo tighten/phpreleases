@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\SendStatsToSlack;
 use App\Console\Commands\SyncPhpReleaseGraphic;
 use App\Console\Commands\SyncPhpReleases;
 use Illuminate\Console\Scheduling\Schedule;
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command(SyncPhpReleases::class)->twiceDaily();
          $schedule->command(SyncPhpReleaseGraphic::class)->daily();
+         $schedule->command(SendStatsToSlack::class)->weeklyOn(5, '8:00');
     }
 
     /**

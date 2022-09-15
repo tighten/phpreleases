@@ -3,8 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\Hit;
+use App\Notifications\WeeklyStats;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Notifications\AnonymousNotifiable;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class StatsTest extends TestCase
@@ -101,5 +104,22 @@ class StatsTest extends TestCase
             'previous' => 0,
             'changePercent' => 100,
         ], $hits);
+    }
+
+    /** @test */
+    public function the_slack_notification_is_sent()
+    {
+        Notification::fake();
+
+        $this->artisan('stats:send')
+            ->assertExitCode(0);
+
+        Notification::assertSentTo(
+            new AnonymousNotifiable(),
+            WeeklyStats::class,
+            function ($notification, $channels, $notifiable) {
+                return $notifiable->routes['slack'] == 'http://localhost';
+            }
+        );
     }
 }
