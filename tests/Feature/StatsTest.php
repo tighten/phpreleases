@@ -7,6 +7,7 @@ use App\Notifications\WeeklyStats;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Notifications\AnonymousNotifiable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
@@ -120,6 +121,35 @@ class StatsTest extends TestCase
             function ($notification, $channels, $notifiable) {
                 return $notifiable->routes['slack'] == 'http://localhost';
             }
+        );
+    }
+
+    /** @test */
+    public function hit_counts_match_week_to_week()
+    {
+        $start = CarbonImmutable::now();
+
+        // create one or more hits per day for past 2 weeks
+        while ($start >= CarbonImmutable::now()->subWeeks(2)) {
+            Hit::factory()
+                ->count(mt_rand(1, 4))
+                ->create([
+                    'created_at' => $start,
+                ]);
+
+            $start = $start->subDay();
+        }
+
+        // get current week hits
+        $currentPeriod = Hit::forTimePeriod();
+
+        // set "now" to one week ago, get previous week hits
+        Carbon::setTestNow(CarbonImmutable::now()->subWeek());
+        $previousPeriod = Hit::forTimePeriod();
+
+        $this->assertSame(
+            $currentPeriod['previous'],
+            $previousPeriod['current'],
         );
     }
 }

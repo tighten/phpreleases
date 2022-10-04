@@ -22,9 +22,19 @@ class Hit extends Model
     public static function forTimePeriod(string $period = 'week'): array
     {
         $now = CarbonImmutable::now();
+        $currentPeriodStart = $now->sub($period, 1)->addSecond();
+        $previousPeriodEnd = $currentPeriodStart->subSecond();
+        $previousPeriodStart = $previousPeriodEnd->sub($period, 1)->addSecond();
 
-        $currentPeriodHits = Hit::hitsBetween($now->sub($period, 1), $now);
-        $previousPeriodHits = Hit::hitsBetween($now->sub($period, 2), $now->sub($period, 1)->subDay());
+        $currentPeriodHits = Hit::hitsBetween(
+            $currentPeriodStart,
+            $now
+        )->count();
+
+        $previousPeriodHits = Hit::hitsBetween(
+            $previousPeriodStart,
+            $previousPeriodEnd
+        )->count();
 
         return [
             'current' => $currentPeriodHits,
@@ -35,11 +45,11 @@ class Hit extends Model
         ];
     }
 
-    private static function hitsBetween(CarbonImmutable $start, CarbonImmutable $end)
+    public static function hitsBetween(CarbonImmutable $start, CarbonImmutable $end)
     {
         return Hit::whereBetween('created_at', [
             $start->toDateTimeString(),
             $end->toDateTimeString(),
-        ])->count();
+        ]);
     }
 }
