@@ -19,16 +19,16 @@ class Hit extends Model
      *
      * @return array
      */
-    public static function forTimePeriod(string $period = 'week'): array
+    public static function forTimePeriod(string $period = 'week', CarbonImmutable $end = null): array
     {
-        $now = CarbonImmutable::now();
-        $currentPeriodStart = $now->sub($period, 1)->addSecond();
+        $currentPeriodEnd = $end ?? CarbonImmutable::now();
+        $currentPeriodStart = $currentPeriodEnd->sub($period, 1)->addSecond();
         $previousPeriodEnd = $currentPeriodStart->subSecond();
         $previousPeriodStart = $previousPeriodEnd->sub($period, 1)->addSecond();
 
         $currentPeriodHits = Hit::hitsBetween(
             $currentPeriodStart,
-            $now
+            $currentPeriodEnd
         )->count();
 
         $previousPeriodHits = Hit::hitsBetween(

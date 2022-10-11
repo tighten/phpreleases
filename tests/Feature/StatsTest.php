@@ -132,12 +132,10 @@ class StatsTest extends TestCase
         // create one or more hits per day for past 2 weeks
         while ($start >= CarbonImmutable::now()->subWeeks(2)) {
             Hit::factory()
-                ->count(mt_rand(1, 4))
                 ->create([
                     'created_at' => $start,
                 ]);
-
-            $start = $start->subDay();
+            $start = $start->subHours(mt_rand(1, 8));
         }
 
         // get current week hits
@@ -151,5 +149,25 @@ class StatsTest extends TestCase
             $currentPeriod['previous'],
             $previousPeriod['current'],
         );
+    }
+
+    /** @test */
+    public function it_handles_a_passed_date()
+    {
+        $now = CarbonImmutable::now();
+
+        // create a hit 7 days + 6 hrs earlier
+        Hit::factory()->create([
+            'created_at' => $now->subWeek()->subHours(6),
+        ]);
+
+        // default "current" should have no hits
+        $default = Hit::forTimePeriod();
+        $this->assertSame(0, $default['current']);
+
+        // create custom time period starting 7 hours ago
+        // custom "current" should have one hit
+        $custom = Hit::forTimePeriod('week', $now->subHours(7));
+        $this->assertSame(1, $custom['current']);
     }
 }
