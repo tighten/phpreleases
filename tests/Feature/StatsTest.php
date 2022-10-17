@@ -7,6 +7,7 @@ use App\Notifications\WeeklyStats;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Notifications\AnonymousNotifiable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
@@ -121,5 +122,52 @@ class StatsTest extends TestCase
                 return $notifiable->routes['slack'] == 'http://localhost';
             }
         );
+    }
+
+    /** @test */
+    public function hit_counts_match_week_to_week()
+    {
+        $start = CarbonImmutable::now();
+
+        // create one or more hits per day for past 2 weeks
+        while ($start >= CarbonImmutable::now()->subWeeks(2)) {
+            Hit::factory()
+                ->create([
+                    'created_at' => $start,
+                ]);
+            $start = $start->subHours(mt_rand(1, 8));
+        }
+
+        // get current week hits
+        $currentPeriod = Hit::forTimePeriod();
+
+        // set "now" to one week ago, get previous week hits
+        Carbon::setTestNow(CarbonImmutable::now()->subWeek());
+        $previousPeriod = Hit::forTimePeriod();
+
+        $this->assertSame(
+            $currentPeriod['previous'],
+            $previousPeriod['current'],
+        );
+    }
+
+    /** @test */
+    public function it_handles_a_passed_date()
+    {
+        $now = CarbonImmutable::now();
+
+        // create a hit 7 days + 6 hrs earlier
+        Hit::factory()->create([
+            'created_at' => $now->subWeek()->subHours(6),
+        ]);
+
+        // default "current" should have no hits
+        $default = Hit::forTimePeriod();
+        $this->assertSame(0, $default['current']);
+
+        // create custom time period starting 7 hours ago
+        // custom "current" should have one hit
+        $custom = Hit::forTimePeriod('week', $now->subHours(7));
+        $this->assertSame(1, $custom['current']);
     }
 }

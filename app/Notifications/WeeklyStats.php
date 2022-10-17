@@ -3,6 +3,7 @@
 namespace App\Notifications;
 
 use App\Models\Hit;
+use Carbon\CarbonImmutable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use NathanHeffley\LaravelSlackBlocks\Messages\SlackMessage;
@@ -18,7 +19,11 @@ class WeeklyStats extends Notification
 
     public function toSlack()
     {
-        $hits = Hit::forTimePeriod('week');
+        $hits = Hit::forTimePeriod(
+            'week',
+            CarbonImmutable::today(config('app.timezone'))
+                ->setTime(7, 0)
+        );
 
         return (new SlackMessage())
             ->block(function ($block) use ($hits) {
