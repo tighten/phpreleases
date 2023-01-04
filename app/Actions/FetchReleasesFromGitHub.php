@@ -49,13 +49,20 @@ class FetchReleasesFromGitHub
                 nodes {
                     name
                     target {
-                    oid
-                    ... on Tag {
-                        commitUrl
-                        tagger {
-                        date
+                        oid
+                        ... on Tag {
+                            commitUrl
+                            tagger {
+                                date
+                            }
                         }
-                    }
+                        ... on Commit {
+                            author {
+                                name
+                                email
+                                date
+                            }
+                        }
                     }
                 }
                 pageInfo {

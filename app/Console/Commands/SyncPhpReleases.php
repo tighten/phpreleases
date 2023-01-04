@@ -6,6 +6,7 @@ use App\Actions\FetchReleasesFromGitHub;
 use App\Models\Release;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -24,7 +25,13 @@ class SyncPhpReleases extends Command
 
         // Map into arrays containing major, minor, and release numbers
         $releases = $releases->map(function ($item) {
-            $tagDate = $item['target']['tagger']['date'];
+            // The release will have a tagger if it's verified,
+            // or an author if it's a commit
+            $tagDate = Arr::get(
+                $item,
+                'target.tagger.date',
+                Arr::get($item, 'target.author.date')
+            );
             $pieces = explode('.', ltrim($item['name'], 'php-'));
 
             return [
