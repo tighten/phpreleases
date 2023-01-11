@@ -22,7 +22,6 @@ Route::get('releases/latest', [ReleaseController::class, 'showLatest']);
 
 Route::get('releases/{release}', [ReleaseController::class, 'show']);
 
-
 Route::get('versions', [ReleaseController::class, 'index']);
 
 Route::get('versions/minimum-supported/{supportType}', [ReleaseController::class, 'minimumSupported']);

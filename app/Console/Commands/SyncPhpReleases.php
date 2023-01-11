@@ -78,7 +78,7 @@ class SyncPhpReleases extends Command
 
     private function fetchReleasesFromGitHub()
     {
-        return (new FetchReleasesFromGitHub())();
+        return (new FetchReleasesFromGitHub)();
     }
 
     private function filterToUsefulReleases(Collection $releases): Collection
