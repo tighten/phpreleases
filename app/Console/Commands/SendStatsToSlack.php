@@ -20,7 +20,7 @@ class SendStatsToSlack extends Command
     public function handle()
     {
         Notification::route('slack', config('services.slack.webhook'))
-            ->notify(new WeeklyStats());
+            ->notify(new WeeklyStats);
 
         return 0;
     }

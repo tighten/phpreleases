@@ -27,9 +27,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command(SyncPhpReleases::class)->twiceDaily();
-         $schedule->command(SyncPhpReleaseGraphic::class)->daily();
-         $schedule->command(SendStatsToSlack::class)->weeklyOn(5, '8:00');
+        $schedule->command(SyncPhpReleases::class)->twiceDaily();
+        $schedule->command(SyncPhpReleaseGraphic::class)->daily();
+        $schedule->command(SendStatsToSlack::class)->weeklyOn(5, '8:00');
     }
 
     /**

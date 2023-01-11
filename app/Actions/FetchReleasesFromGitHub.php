@@ -38,7 +38,7 @@ class FetchReleasesFromGitHub
         // Format the filters at runtime to include pagination
         $filters = collect($this->filters)
             ->map(function ($value, $key) {
-                return "{$key}: $value";
+                return "{$key}: {$value}";
             })
             ->implode(', ');
 

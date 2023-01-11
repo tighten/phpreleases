@@ -116,7 +116,7 @@ class StatsTest extends TestCase
             ->assertExitCode(0);
 
         Notification::assertSentTo(
-            new AnonymousNotifiable(),
+            new AnonymousNotifiable,
             WeeklyStats::class,
             function ($notification, $channels, $notifiable) {
                 return $notifiable->routes['slack'] == 'http://localhost';

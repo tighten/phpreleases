@@ -25,8 +25,8 @@ class WeeklyStats extends Notification
                 ->setTime(7, 0)
         );
 
-        return (new SlackMessage())
-            ->block(function ($block) use ($hits) {
+        return (new SlackMessage)
+            ->block(function ($block) {
                 $block->type('header')
                     ->text([
                         'type' => 'plain_text',
@@ -57,7 +57,7 @@ class WeeklyStats extends Notification
                         ],
                     ]);
             })
-            ->block(function ($block) use ($hits) {
+            ->block(function ($block) {
                 $block->type('section')
                     ->text([
                         'type' => 'mrkdwn',

@@ -265,23 +265,23 @@ class ReleaseControllerTest extends TestCase
     /** @test */
     public function it_can_get_the_latest_release()
     {
-          $release = Release::factory()->create([
-              'major' => 10,
-              'minor' => 10,
-              'release' => 0,
-          ]);
+        $release = Release::factory()->create([
+            'major' => 10,
+            'minor' => 10,
+            'release' => 0,
+        ]);
 
-          Release::factory()->create([
-              'major' => 10,
-              'minor' => 9,
-              'release' => 0,
-          ]);
+        Release::factory()->create([
+            'major' => 10,
+            'minor' => 9,
+            'release' => 0,
+        ]);
 
-          Release::factory()->create([
-              'major' => 9,
-              'minor' => 1,
-              'release' => 0,
-          ]);
+        Release::factory()->create([
+            'major' => 9,
+            'minor' => 1,
+            'release' => 0,
+        ]);
 
         Release::factory()->create([
             'major' => 9,
