@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1dc042ab4b3436095f6797769420a8a",
+    "content-hash": "43d5f79ab6669caf009d03419914ded5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -7973,16 +7973,16 @@
         },
         {
             "name": "tightenco/duster",
-            "version": "v0.5.4",
+            "version": "v0.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tighten/duster.git",
-                "reference": "33dac8c74014e5cea3b3bf4714ed140f502a2c69"
+                "reference": "9f066d64e5cc5ea0c6c6376dfd3d9f241cf35081"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tighten/duster/zipball/33dac8c74014e5cea3b3bf4714ed140f502a2c69",
-                "reference": "33dac8c74014e5cea3b3bf4714ed140f502a2c69",
+                "url": "https://api.github.com/repos/tighten/duster/zipball/9f066d64e5cc5ea0c6c6376dfd3d9f241cf35081",
+                "reference": "9f066d64e5cc5ea0c6c6376dfd3d9f241cf35081",
                 "shasum": ""
             },
             "require": {
@@ -8037,7 +8037,7 @@
                 "issues": "https://github.com/tighten/duster/issues",
                 "source": "https://github.com/tighten/duster"
             },
-            "time": "2023-01-10T22:59:29+00:00"
+            "time": "2023-01-12T23:22:48+00:00"
         }
     ],
     "aliases": [],
