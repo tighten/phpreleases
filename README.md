@@ -1,5 +1,4 @@
-# PHP Releases API
-
+![phpreleases.png](public%2Fimages%2Fphpreleases.png)
 ![GitHub Actions Status](https://github.com/tighten/phpreleases/actions/workflows/tests.yml/badge.svg)
 
 
