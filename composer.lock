@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43d5f79ab6669caf009d03419914ded5",
+    "content-hash": "6b36b8a0f061180a771b2196a17bc2c9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -7973,29 +7973,30 @@
         },
         {
             "name": "tightenco/duster",
-            "version": "v0.5.5",
+            "version": "v0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tighten/duster.git",
-                "reference": "9f066d64e5cc5ea0c6c6376dfd3d9f241cf35081"
+                "reference": "46cb0a95db92f91c6c7134bea839796b98f27468"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tighten/duster/zipball/9f066d64e5cc5ea0c6c6376dfd3d9f241cf35081",
-                "reference": "9f066d64e5cc5ea0c6c6376dfd3d9f241cf35081",
+                "url": "https://api.github.com/repos/tighten/duster/zipball/46cb0a95db92f91c6c7134bea839796b98f27468",
+                "reference": "46cb0a95db92f91c6c7134bea839796b98f27468",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.12",
+                "friendsofphp/php-cs-fixer": "^3.14",
                 "laravel-zero/framework": "^9.2",
-                "laravel/pint": "^1.2",
+                "laravel/pint": "1.5",
                 "mockery/mockery": "^1.4.4",
                 "nunomaduro/larastan": "^2.2",
                 "nunomaduro/termwind": "^1.14",
                 "pestphp/pest": "^1.21.3",
+                "rector/rector": "^0.15.10",
                 "spatie/invade": "^1.1",
                 "spatie/laravel-ray": "^1.31",
                 "squizlabs/php_codesniffer": "^3.7",
@@ -8037,7 +8038,7 @@
                 "issues": "https://github.com/tighten/duster/issues",
                 "source": "https://github.com/tighten/duster"
             },
-            "time": "2023-01-12T23:22:48+00:00"
+            "time": "2023-03-03T17:55:59+00:00"
         }
     ],
     "aliases": [],
