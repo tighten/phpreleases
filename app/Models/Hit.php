@@ -16,7 +16,6 @@ class Hit extends Model
      * @param  string  $period    Available Options: millenium, century, decade,
      *                          year, quarter, month, week, day, weekday, hour,
      *                          minute, second, microsecond
-     * @return array
      */
     public static function forTimePeriod(string $period = 'week', CarbonImmutable $end = null): array
     {
