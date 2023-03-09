@@ -1,9 +1,12 @@
 name: tests
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
+  # Commits made in Duster Fix will not trigger any workflows
+  # Tests are configured to run after the workflow finishes
+  workflow_run:
+    workflows: ["Duster Fix"]
+    types:
+      - completed
 
 jobs:
   test:
