@@ -55,7 +55,7 @@
             @foreach ($hits as $hit)
                 <tr>
                     <td class="whitespace-nowrap py-4 pl-4 text-sm text-gray-500">{{ $hit->endpoint }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $hit->user_agent }}</td>
+                    <td class="px-3 py-4 text-sm text-gray-500">{{ $hit->user_agent }}</td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $hit->created_at }}</td>
                 </tr>
             @endforeach

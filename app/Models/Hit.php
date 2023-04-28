@@ -5,12 +5,22 @@ namespace App\Models;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Hit extends Model
 {
     use HasFactory;
 
     protected $fillable = ['endpoint', 'user_agent'];
+
+    protected static function boot()
+    {
+        parent::boot();
+    
+        static::addGlobalScope('order', function (Builder $builder) {
+            $builder->orderBy('created_at', 'desc');
+        });
+    }
 
     /**
      * @param  string  $period    Available Options: millenium, century, decade,
