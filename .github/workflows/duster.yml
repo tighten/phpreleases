@@ -1,9 +1,9 @@
 name: Duster Fix
 
 on:
-    push:
-        branches: main
-    pull_request:
+  pull_request:
+  push:
+    branches: main
 
 jobs:
   duster:
