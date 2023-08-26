@@ -24,6 +24,7 @@
     <meta property="og:image" content="{{ config('app.url') . '/images/phpreleases-cover.png' }}">
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @stack('scripts')
 </head>
 <body>
     <div>
@@ -40,7 +41,6 @@
         <div>Brought to you by the lovely folks at <a href="https://tighten.co/" class="text-indigo-700 hover:text-indigo-900 underline">Tighten</a>.</div>
     </div>
 
-    @include('scripts')
 </body>
 </html>
 
