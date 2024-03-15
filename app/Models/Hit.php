@@ -11,7 +11,7 @@ class Hit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['endpoint', 'user_agent'];
+    protected $fillable = ['endpoint', 'user_agent', 'referer', 'ip'];
 
     /**
      * @param  string  $period    Available Options: millenium, century, decade,
