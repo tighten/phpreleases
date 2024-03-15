@@ -18,7 +18,7 @@ class Hit extends Model
      *                          year, quarter, month, week, day, weekday, hour,
      *                          minute, second, microsecond
      */
-    public static function forTimePeriod(string $period = 'week', CarbonImmutable $end = null): array
+    public static function forTimePeriod(string $period = 'week', ?CarbonImmutable $end = null): array
     {
         $currentPeriodEnd = $end ?? CarbonImmutable::now();
         $currentPeriodStart = $currentPeriodEnd->sub($period, 1)->addSecond();

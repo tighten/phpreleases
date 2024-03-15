@@ -118,7 +118,7 @@ class ReleaseControllerTest extends TestCase
             'release' => PHP_RELEASE_VERSION,
         ]);
 
-        $phpVersion = PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION.'.'.PHP_RELEASE_VERSION;
+        $phpVersion = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION . '.' . PHP_RELEASE_VERSION;
 
         $this->getJson('api/releases/' . $phpVersion)
             ->assertJsonStructure([

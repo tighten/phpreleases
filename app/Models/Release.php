@@ -57,7 +57,7 @@ class Release extends Model
 
     public function getChangelogUrlAttribute()
     {
-        return  "https://www.php.net/ChangeLog-{$this->major}.php#{$this->__toString()}";
+        return "https://www.php.net/ChangeLog-{$this->major}.php#{$this->__toString()}";
     }
 
     public function __toString()
