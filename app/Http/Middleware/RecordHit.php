@@ -27,6 +27,8 @@ class RecordHit
             Hit::create([
                 'endpoint' => $uri,
                 'user_agent' => $userAgent,
+                'referer' => $request->header('referer'),
+                'ip' => $request->ip(),
             ]);
         }
     }

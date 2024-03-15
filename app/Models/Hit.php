@@ -11,14 +11,14 @@ class Hit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['endpoint', 'user_agent'];
+    protected $fillable = ['endpoint', 'user_agent', 'referer', 'ip'];
 
     /**
      * @param  string  $period    Available Options: millenium, century, decade,
      *                          year, quarter, month, week, day, weekday, hour,
      *                          minute, second, microsecond
      */
-    public static function forTimePeriod(string $period = 'week', CarbonImmutable $end = null): array
+    public static function forTimePeriod(string $period = 'week', ?CarbonImmutable $end = null): array
     {
         $currentPeriodEnd = $end ?? CarbonImmutable::now();
         $currentPeriodStart = $currentPeriodEnd->sub($period, 1)->addSecond();

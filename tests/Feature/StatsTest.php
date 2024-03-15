@@ -20,11 +20,15 @@ class StatsTest extends TestCase
     {
         $this->getJson('api/releases/8.0.0', [
             'User-Agent' => 'My Test Agent',
+            'Referer' => 'http://example.com',
+            'REMOTE_ADDR' => '127.0.0.1',
         ]);
 
         $this->assertDatabaseHas('hits', [
             'endpoint' => '/api/releases/8.0.0',
             'user_agent' => 'My Test Agent',
+            'referer' => 'http://example.com',
+            'ip' => '127.0.0.1',
         ]);
     }
 
