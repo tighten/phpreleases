@@ -123,7 +123,7 @@ class StatsTest extends TestCase
             new AnonymousNotifiable,
             WeeklyStats::class,
             function ($notification, $channels, $notifiable) {
-                return $notifiable->routes['slack'] == 'http://localhost';
+                return $notifiable->routes['slack'] == config('services.slack.webhook');
             }
         );
     }
