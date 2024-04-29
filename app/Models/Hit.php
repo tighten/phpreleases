@@ -59,5 +59,9 @@ class Hit extends Model
         static::addGlobalScope('order', function (Builder $builder) {
             $builder->orderBy('created_at', 'desc');
         });
+
+        static::addGlobalScope('api', function (Builder $builder) {
+            $builder->where('endpoint', 'LIKE', '/api/%');
+        });
     }
 }
