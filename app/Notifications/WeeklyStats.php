@@ -30,7 +30,7 @@ class WeeklyStats extends Notification
                 $block->type('header')
                     ->text([
                         'type' => 'plain_text',
-                        'text' => 'PHP Releases Weekly Hits!',
+                        'text' => 'PHP Releases Weekly API Hits!',
                     ]);
             })
             ->block(function ($block) use ($hits) {
