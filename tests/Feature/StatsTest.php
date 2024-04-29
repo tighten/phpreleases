@@ -46,6 +46,30 @@ class StatsTest extends TestCase
     }
 
     /** @test */
+    public function it_filters_out_web_requests(): void
+    {
+        Hit::factory()
+            ->count(2)
+            ->create([
+                'endpoint' => '/',
+            ]);
+
+        Hit::factory()
+            ->count(2)
+            ->create([
+                'endpoint' => '/api/releases',
+            ]);
+
+        $hits = Hit::forTimePeriod('week');
+
+        $this->assertSame([
+            'current' => 2,
+            'previous' => 0,
+            'changePercent' => 100,
+        ], $hits);
+    }
+
+    /** @test */
     public function it_calculates_percent_increase()
     {
         Hit::factory()
