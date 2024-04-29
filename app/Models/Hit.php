@@ -14,7 +14,7 @@ class Hit extends Model
     protected $fillable = ['endpoint', 'user_agent', 'referer', 'ip'];
 
     /**
-     * @param  string  $period    Available Options: millenium, century, decade,
+     * @param  string  $period  Available Options: millenium, century, decade,
      *                          year, quarter, month, week, day, weekday, hour,
      *                          minute, second, microsecond
      */
