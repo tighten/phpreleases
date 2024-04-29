@@ -25,6 +25,10 @@
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     @stack('scripts')
+
+    @if (app()->environment('production'))
+        <script src="https://cdn.usefathom.com/script.js" data-site="MKBAABBX" defer></script>
+    @endif
 </head>
 <body>
     <div>
