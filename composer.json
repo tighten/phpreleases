@@ -2,7 +2,12 @@
     "name": "tighten/phpreleases",
     "type": "project",
     "description": "PHP Releases API.",
-    "keywords": ["php", "php releases", "php versions","tighten"],
+    "keywords": [
+        "php",
+        "php releases",
+        "php versions",
+        "tighten"
+    ],
     "homepage": "https://phpreleases.com",
     "license": "MIT",
     "authors": [
@@ -19,7 +24,6 @@
     ],
     "require": {
         "php": "^8.2",
-        "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^9.0",
         "laravel/slack-notification-channel": "^2.4",
