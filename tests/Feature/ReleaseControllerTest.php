@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\Release;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -11,7 +12,7 @@ class ReleaseControllerTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
+    #[Test]
     public function it_can_get_the_releases(): void
     {
         Release::factory()->count(12)->create();
@@ -19,7 +20,7 @@ class ReleaseControllerTest extends TestCase
         $this->getJson('/api/releases')->assertJsonCount(12);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_the_minimum_security_supported_release(): void
     {
         $now = CarbonImmutable::now();
@@ -64,7 +65,7 @@ class ReleaseControllerTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_the_minimum_active_supported_release(): void
     {
         $now = CarbonImmutable::now();
@@ -109,7 +110,7 @@ class ReleaseControllerTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_parse_a_php_release_and_return_all_details(): void
     {
         $currentRelease = Release::factory()->create([
@@ -145,7 +146,7 @@ class ReleaseControllerTest extends TestCase
             ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_all_minor_releases_when_provided_major(): void
     {
         Release::factory()
@@ -184,7 +185,7 @@ class ReleaseControllerTest extends TestCase
             ->assertJsonCount(3);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_all_releases_when_provided_major_and_minor(): void
     {
         Release::factory()
@@ -213,7 +214,7 @@ class ReleaseControllerTest extends TestCase
             ->assertJsonCount(0);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_the_latest_release(): void
     {
         Release::factory()
@@ -241,7 +242,7 @@ class ReleaseControllerTest extends TestCase
         $this->assertSame(1, $latest->release);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_correct_values_for_needs_patch(): void
     {
         $now = CarbonImmutable::now();
@@ -264,7 +265,7 @@ class ReleaseControllerTest extends TestCase
         $this->assertFalse($noPatch->refresh()->needs_patch);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_get_the_latest_release(): void
     {
         $release = Release::factory()->create([
@@ -295,7 +296,7 @@ class ReleaseControllerTest extends TestCase
             ->assertJsonFragment([$release->__toString()]);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_the_highest_release_number_as_latest_release(): void
     {
         $now = CarbonImmutable::now();
@@ -322,7 +323,7 @@ class ReleaseControllerTest extends TestCase
             ->assertJsonFragment([$latest->__toString()]);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_the_expected_value_for_changelog_url(): void
     {
         $release = Release::factory()->create();
@@ -333,7 +334,7 @@ class ReleaseControllerTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_sorts_correctly(): void
     {
         Release::factory()
@@ -354,14 +355,14 @@ class ReleaseControllerTest extends TestCase
         $this->assertEquals(0, $response[4]['minor']);
     }
 
-    /** @test */
+    #[Test]
     public function it_validates_the_support_type(): void
     {
         $this->getJson('api/releases/minimum-supported/' . 'foo')
             ->assertJsonValidationErrors('supportType');
     }
 
-    /** @test */
+    #[Test]
     public function it_validates_the_version_param(): void
     {
         Release::factory()->create([

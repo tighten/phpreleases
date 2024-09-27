@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use PHPUnit\Framework\Attributes\Test;
 use App\Models\Hit;
 use App\Notifications\WeeklyStats;
 use Carbon\CarbonImmutable;
@@ -15,7 +16,7 @@ class StatsTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
+    #[Test]
     public function it_stores_the_hit(): void
     {
         $this->getJson('api/releases/8.0.0', [
@@ -32,7 +33,7 @@ class StatsTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_ignores_bot_user_agents(): void
     {
         $this->getJson('/', [
@@ -45,7 +46,7 @@ class StatsTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_filters_out_web_requests(): void
     {
         Hit::factory()
@@ -69,7 +70,7 @@ class StatsTest extends TestCase
         ], $hits);
     }
 
-    /** @test */
+    #[Test]
     public function it_calculates_percent_increase(): void
     {
         Hit::factory()
@@ -93,7 +94,7 @@ class StatsTest extends TestCase
         ], $hits);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_a_percent_decrease(): void
     {
         Hit::factory()
@@ -117,7 +118,7 @@ class StatsTest extends TestCase
         ], $hits);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_first_period_values(): void
     {
         Hit::factory()
@@ -135,7 +136,7 @@ class StatsTest extends TestCase
         ], $hits);
     }
 
-    /** @test */
+    #[Test]
     public function the_slack_notification_is_sent(): void
     {
         Notification::fake();
@@ -152,7 +153,7 @@ class StatsTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function hit_counts_match_week_to_week(): void
     {
         $start = CarbonImmutable::now();
@@ -179,7 +180,7 @@ class StatsTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_a_passed_date(): void
     {
         $now = CarbonImmutable::now();
