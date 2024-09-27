@@ -22,6 +22,6 @@ class SendStatsToSlack extends Command
         Notification::route('slack', config('services.slack.webhook'))
             ->notify(new WeeklyStats);
 
-        return 0;
+        return self::SUCCESS;
     }
 }

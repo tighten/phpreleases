@@ -74,6 +74,8 @@ class SyncPhpReleases extends Command
         });
 
         $this->info('Finished saving PHP releases.');
+
+        return Self::SUCCESS;
     }
 
     private function fetchReleasesFromGitHub()
