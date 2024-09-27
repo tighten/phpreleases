@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\View\View;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class IndexController
 {
