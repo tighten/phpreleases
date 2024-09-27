@@ -17,7 +17,7 @@ class SyncPhpReleases extends Command
 
     protected $description = 'Pull PHP releases from GitHub into our application.';
 
-    public function handle()
+    public function handle(): int
     {
         Log::info('Syncing PHP Releases');
 

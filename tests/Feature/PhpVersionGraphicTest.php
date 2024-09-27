@@ -11,7 +11,7 @@ use Tests\TestCase;
 class PhpVersionGraphicTest extends TestCase
 {
     /** @test */
-    public function it_fetches_the_svg()
+    public function it_fetches_the_svg(): void
     {
         Storage::fake('public');
 
@@ -25,7 +25,7 @@ class PhpVersionGraphicTest extends TestCase
     }
 
     /** @test */
-    public function it_does_not_store_html_response_from_php_net()
+    public function it_does_not_store_html_response_from_php_net(): void
     {
         Storage::fake('public');
 
@@ -42,7 +42,7 @@ class PhpVersionGraphicTest extends TestCase
     }
 
     /** @test */
-    public function it_does_not_store_if_there_are_no_changes()
+    public function it_does_not_store_if_there_are_no_changes(): void
     {
         Storage::fake('public');
 

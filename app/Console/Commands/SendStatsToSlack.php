@@ -17,7 +17,7 @@ class SendStatsToSlack extends Command
         parent::__construct();
     }
 
-    public function handle()
+    public function handle(): int
     {
         Notification::route('slack', config('services.slack.webhook'))
             ->notify(new WeeklyStats);

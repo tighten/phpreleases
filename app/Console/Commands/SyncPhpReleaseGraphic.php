@@ -13,7 +13,7 @@ class SyncPhpReleaseGraphic extends Command
 
     protected $description = 'Fetch the most recent Version Support graphic from https://www.php.net/images/supported-versions.php';
 
-    public function handle()
+    public function handle(): int
     {
         $svgResponse = Http::get('https://www.php.net/images/supported-versions.php');
 

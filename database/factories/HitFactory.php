@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class HitFactory extends Factory
 {
-    public function definition()
+    public function definition(): array
     {
         return [
             'endpoint' => '/api/releases/' . random_int(5, 9) . '.' . random_int(0, 12) . random_int(0, 25),

@@ -12,7 +12,7 @@ class WeeklyStats extends Notification
 {
     use Queueable;
 
-    public function via()
+    public function via(): array
     {
         return ['slack'];
     }

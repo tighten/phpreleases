@@ -13,7 +13,7 @@ class ReleaseFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         $taggedAt = CarbonImmutable::now()
             ->subMonths($this->faker->randomNumber(1))
