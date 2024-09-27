@@ -6,7 +6,8 @@ use App\Models\Hit;
 use Carbon\CarbonImmutable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use NathanHeffley\LaravelSlackBlocks\Messages\SlackMessage;
+use Illuminate\Notifications\Slack\BlockKit\Blocks\SectionBlock;
+use Illuminate\Notifications\Slack\SlackMessage;
 
 class WeeklyStats extends Notification
 {
@@ -17,7 +18,7 @@ class WeeklyStats extends Notification
         return ['slack'];
     }
 
-    public function toSlack()
+    public function toSlack(): SlackMessage
     {
         $hits = Hit::forTimePeriod(
             'week',
@@ -26,43 +27,18 @@ class WeeklyStats extends Notification
         );
 
         return (new SlackMessage)
-            ->block(function ($block) {
-                $block->type('header')
-                    ->text([
-                        'type' => 'plain_text',
-                        'text' => 'PHP Releases Weekly API Hits!',
-                    ]);
+            ->headerBlock('PHP Releases Weekly API Hits!')
+            ->sectionBlock(function (SectionBlock $block) use ($hits) {
+                $block->field("*Current Period:*\n{$hits['current']}")->markdown();
+                $block->field("*Previous Period:*\n{$hits['previous']}")->markdown();
             })
-            ->block(function ($block) use ($hits) {
-                $block->type('section')
-                    ->fields([
-                        [
-                            'type' => 'mrkdwn',
-                            'text' => "*Current Period:*\n{$hits['current']}",
-                        ],
-                        [
-                            'type' => 'mrkdwn',
-                            'text' => "*Previous Period:*\n{$hits['previous']}",
-                        ],
-                    ]);
-            })
-            ->block(function ($block) use ($hits) {
+            ->sectionBlock(function (SectionBlock $block) use ($hits) {
                 $emoji = $hits['changePercent'] > 0 ? ':arrow_up:' : ':arrow_down:';
-
-                $block->type('section')
-                    ->fields([
-                        [
-                            'type' => 'mrkdwn',
-                            'text' => "*Change:*\n{$emoji} {$hits['changePercent']}%",
-                        ],
-                    ]);
+                $block->text("*Change:*\n{$emoji} {$hits['changePercent']}%")->markdown();
             })
-            ->block(function ($block) {
-                $block->type('section')
-                    ->text([
-                        'type' => 'mrkdwn',
-                        'text' => 'See more detail at :link:phpreleases.com/stats',
-                    ]);
+            ->dividerBlock()
+            ->sectionBlock(function (SectionBlock $block) {
+                $block->text("See more detail at :link:phpreleases.com/stats")->markdown();
             });
     }
 }

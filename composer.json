@@ -26,9 +26,8 @@
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.48",
-        "laravel/slack-notification-channel": "^2.5",
+        "laravel/slack-notification-channel": "^3.3",
         "laravel/tinker": "^2.8",
-        "nathanheffley/laravel-slack-blocks": "^2.3",
         "stevegrunwell/time-constants": "^1.1"
     },
     "require-dev": {
