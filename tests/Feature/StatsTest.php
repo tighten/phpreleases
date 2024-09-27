@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\Models\Hit;
 use App\Notifications\WeeklyStats;
 use Carbon\CarbonImmutable;
@@ -10,6 +9,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Notification;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 final class StatsTest extends TestCase

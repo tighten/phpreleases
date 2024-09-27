@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use PHPUnit\Framework\Attributes\Test;
 use App\Console\Commands\SyncPhpReleaseGraphic;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 final class PhpVersionGraphicTest extends TestCase
