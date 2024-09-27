@@ -8,7 +8,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
-class ReleaseControllerTest extends TestCase
+final class ReleaseControllerTest extends TestCase
 {
     use DatabaseMigrations;
 

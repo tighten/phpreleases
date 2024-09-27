@@ -12,7 +12,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-class StatsTest extends TestCase
+final class StatsTest extends TestCase
 {
     use DatabaseMigrations;
 

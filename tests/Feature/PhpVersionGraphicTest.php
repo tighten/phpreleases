@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class PhpVersionGraphicTest extends TestCase
+final class PhpVersionGraphicTest extends TestCase
 {
     #[Test]
     public function it_fetches_the_svg(): void
