@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\View\View;
 use App\Models\Hit;
 use Illuminate\Support\Facades\DB;
 
 class HitController
 {
-    public function __invoke()
+    public function __invoke(): View
     {
         return view('stats', [
             'hits' => Hit::simplePaginate(),

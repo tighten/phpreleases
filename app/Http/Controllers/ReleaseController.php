@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use App\Http\Resources\ReleaseResource;
 use App\Models\Release;
 use Carbon\Carbon;
@@ -33,7 +34,7 @@ class ReleaseController
         );
     }
 
-    public function showLatest()
+    public function showLatest(): JsonResponse
     {
         return response()->json(
             (string) Release::orderByDesc('major')
