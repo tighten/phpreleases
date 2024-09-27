@@ -38,7 +38,7 @@ class WeeklyStats extends Notification
             })
             ->dividerBlock()
             ->sectionBlock(function (SectionBlock $block) {
-                $block->text("See more detail at :link:phpreleases.com/stats")->markdown();
+                $block->text('See more detail at :link:phpreleases.com/stats')->markdown();
             });
     }
 }
