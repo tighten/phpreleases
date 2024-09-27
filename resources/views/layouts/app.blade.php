@@ -23,7 +23,7 @@
     <meta name="twitter:description" content="API endpoints with support information for PHP versions 5.6 and later.">
     <meta property="og:image" content="{{ config('app.url') . '/images/phpreleases-cover.png' }}">
 
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    @vite('resources/css/app.css')
     @stack('scripts')
 
     @if (app()->environment('production'))

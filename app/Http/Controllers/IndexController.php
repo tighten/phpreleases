@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class IndexController
 {
-    public function index()
+    public function index(): View
     {
         return view('index', ['graphicUpdatedToday' => $this->graphicHasBeenUpdatedToday()]);
     }

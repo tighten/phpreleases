@@ -9,7 +9,7 @@ class ReleaseResource extends JsonResource
 {
     public static $wrap = 'provided';
 
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
             'major' => $this->major,

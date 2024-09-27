@@ -6,12 +6,13 @@ use App\Console\Commands\SyncPhpReleaseGraphic;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class PhpVersionGraphicTest extends TestCase
+final class PhpVersionGraphicTest extends TestCase
 {
-    /** @test */
-    public function it_fetches_the_svg()
+    #[Test]
+    public function it_fetches_the_svg(): void
     {
         Storage::fake('public');
 
@@ -24,8 +25,8 @@ class PhpVersionGraphicTest extends TestCase
         Storage::disk('public')->assertExists('supported-versions.svg');
     }
 
-    /** @test */
-    public function it_does_not_store_html_response_from_php_net()
+    #[Test]
+    public function it_does_not_store_html_response_from_php_net(): void
     {
         Storage::fake('public');
 
@@ -41,8 +42,8 @@ class PhpVersionGraphicTest extends TestCase
         Storage::disk('public')->assertMissing('supported-versions.svg');
     }
 
-    /** @test */
-    public function it_does_not_store_if_there_are_no_changes()
+    #[Test]
+    public function it_does_not_store_if_there_are_no_changes(): void
     {
         Storage::fake('public');
 

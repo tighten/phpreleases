@@ -13,7 +13,7 @@ class SyncPhpReleaseGraphic extends Command
 
     protected $description = 'Fetch the most recent Version Support graphic from https://www.php.net/images/supported-versions.php';
 
-    public function handle()
+    public function handle(): int
     {
         $svgResponse = Http::get('https://www.php.net/images/supported-versions.php');
 
@@ -21,7 +21,7 @@ class SyncPhpReleaseGraphic extends Command
         if (str_contains($svgResponse, '<!DOCTYPE html>')) {
             Log::warning('Failed fetching the svg');
 
-            return 1;
+            return self::FAILURE;
         }
 
         // Check if there are any changes to the SVG since we last synced it
@@ -29,11 +29,11 @@ class SyncPhpReleaseGraphic extends Command
             Storage::disk('public')->exists('supported-versions.svg')
             && Storage::disk('public')->get('supported-versions.svg') === $svgResponse->body()
         ) {
-            return 0;
+            return self::SUCCESS;
         }
 
         Storage::disk('public')->put('supported-versions.svg', $svgResponse);
 
-        return 0;
+        return self::SUCCESS;
     }
 }

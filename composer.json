@@ -2,7 +2,12 @@
     "name": "tighten/phpreleases",
     "type": "project",
     "description": "PHP Releases API.",
-    "keywords": ["php", "php releases", "php versions","tighten"],
+    "keywords": [
+        "php",
+        "php releases",
+        "php versions",
+        "tighten"
+    ],
     "homepage": "https://phpreleases.com",
     "license": "MIT",
     "authors": [
@@ -19,22 +24,20 @@
     ],
     "require": {
         "php": "^8.2",
-        "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^9.0",
-        "laravel/slack-notification-channel": "^2.4",
-        "laravel/tinker": "^2.5",
-        "nathanheffley/laravel-slack-blocks": "^2.3",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^10.48",
+        "laravel/slack-notification-channel": "^3.3",
+        "laravel/tinker": "^2.8",
         "stevegrunwell/time-constants": "^1.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
-        "laravel/sail": "^1.0.1",
-        "mockery/mockery": "^1.4.2",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.3.3",
-        "spatie/laravel-ignition": "^1.0",
-        "tightenco/duster": "^2.7"
+        "laravel/sail": "^1.18",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0",
+        "tightenco/duster": "^3.0"
     },
     "autoload": {
         "psr-4": {
@@ -61,6 +64,12 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "lint": [
+            "./vendor/bin/duster lint"
+        ],
+        "fix": [
+            "./vendor/bin/duster fix"
         ]
     },
     "extra": {
@@ -76,6 +85,6 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

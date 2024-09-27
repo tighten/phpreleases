@@ -9,14 +9,15 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Notifications\AnonymousNotifiable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Notification;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class StatsTest extends TestCase
+final class StatsTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /** @test */
-    public function it_stores_the_hit()
+    #[Test]
+    public function it_stores_the_hit(): void
     {
         $this->getJson('api/releases/8.0.0', [
             'User-Agent' => 'My Test Agent',
@@ -32,8 +33,8 @@ class StatsTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_ignores_bot_user_agents()
+    #[Test]
+    public function it_ignores_bot_user_agents(): void
     {
         $this->getJson('/', [
             'User-Agent' => 'Mozilla/5.0 (compatible; DuckDuckGo-Favicons-Bot/1.0; +http://duckduckgo.com)',
@@ -45,7 +46,7 @@ class StatsTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function it_filters_out_web_requests(): void
     {
         Hit::factory()
@@ -69,8 +70,8 @@ class StatsTest extends TestCase
         ], $hits);
     }
 
-    /** @test */
-    public function it_calculates_percent_increase()
+    #[Test]
+    public function it_calculates_percent_increase(): void
     {
         Hit::factory()
             ->count(2)
@@ -93,8 +94,8 @@ class StatsTest extends TestCase
         ], $hits);
     }
 
-    /** @test */
-    public function it_handles_a_percent_decrease()
+    #[Test]
+    public function it_handles_a_percent_decrease(): void
     {
         Hit::factory()
             ->count(6)
@@ -117,8 +118,8 @@ class StatsTest extends TestCase
         ], $hits);
     }
 
-    /** @test */
-    public function it_handles_first_period_values()
+    #[Test]
+    public function it_handles_first_period_values(): void
     {
         Hit::factory()
             ->count(2)
@@ -135,8 +136,8 @@ class StatsTest extends TestCase
         ], $hits);
     }
 
-    /** @test */
-    public function the_slack_notification_is_sent()
+    #[Test]
+    public function the_slack_notification_is_sent(): void
     {
         Notification::fake();
 
@@ -152,8 +153,8 @@ class StatsTest extends TestCase
         );
     }
 
-    /** @test */
-    public function hit_counts_match_week_to_week()
+    #[Test]
+    public function hit_counts_match_week_to_week(): void
     {
         $start = CarbonImmutable::now();
 
@@ -179,8 +180,8 @@ class StatsTest extends TestCase
         );
     }
 
-    /** @test */
-    public function it_handles_a_passed_date()
+    #[Test]
+    public function it_handles_a_passed_date(): void
     {
         $now = CarbonImmutable::now();
 

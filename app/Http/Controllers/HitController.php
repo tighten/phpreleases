@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Hit;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class HitController
 {
-    public function __invoke()
+    public function __invoke(): View
     {
         return view('stats', [
             'hits' => Hit::simplePaginate(),
