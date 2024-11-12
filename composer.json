@@ -24,7 +24,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.9",
         "laravel/framework": "^10.48",
         "laravel/slack-notification-channel": "^3.3",
         "laravel/tinker": "^2.8",
