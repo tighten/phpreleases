@@ -32,6 +32,8 @@ Before submitting a pull request:
 - Run `composer install`
 - Run `cp .env.example .env` in the terminal
 - Generate a [Github Personal Access token](https://github.com/settings/tokens) and store it as the `GITHUB_TOKEN` value in `.env`
+	- Set "Repository access" to "Public repositories"
+	- No additional permissions needed
 - Create a database called `phpreleases`
 - Run `php artisan migrate --seed`
 
