@@ -36,11 +36,12 @@ Before submitting a pull request:
 	- No additional permissions needed
 - Create a database called `phpreleases`
 - Run `php artisan migrate --seed`
+- Run `php artisan sync:php-release-graphic`
+- Run `npm install` and `npm run build`
 
 ### Testing
 
-- Run `cp .env.testing.example .env.testing` in the terminal
-- Run `vendor/bin/phpunit` in the terminal
+- Run `php artisan test` in the terminal
 
 ## Requirements
 
