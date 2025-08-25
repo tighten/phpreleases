@@ -349,9 +349,9 @@ final class ReleaseControllerTest extends TestCase
         $response = $this->get('api/releases/8')
             ->assertJsonCount(5);
 
-        //the first should be 8.0
+        // the first should be 8.0
         $this->assertEquals(4, $response[0]['minor']);
-        //the final should be 8.4
+        // the final should be 8.4
         $this->assertEquals(0, $response[4]['minor']);
     }
 
