@@ -31,6 +31,7 @@
     @endif
 </head>
 <body>
+    <x-community-banner />
     <div>
 
         @include('partials.header')
