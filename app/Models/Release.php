@@ -14,6 +14,21 @@ class Release extends Model
 
     protected $appends = ['needs_patch', 'needs_upgrade', 'changelog_url'];
 
+    public function getNeedsUpgradeAttribute()
+    {
+        return $this->attributes['needs_upgrade'] = $this->active_support_until < now();
+    }
+
+    public function getNeedsPatchAttribute()
+    {
+        return $this->attributes['needs_patch'] = $this->needs_upgrade || $this->release !== Release::query()->latestReleaseForMinorVersion($this->major, $this->minor)->first()->release;
+    }
+
+    public function getChangelogUrlAttribute()
+    {
+        return "https://www.php.net/ChangeLog-{$this->major}.php#{$this->__toString()}";
+    }
+
     #[Scope]
     protected function latestRelease($query)
     {
@@ -42,21 +57,6 @@ class Release extends Model
     protected function hasSecuritySupport($query)
     {
         return $query->where('security_support_until', '>', now());
-    }
-
-    public function getNeedsUpgradeAttribute()
-    {
-        return $this->attributes['needs_upgrade'] = $this->active_support_until < now();
-    }
-
-    public function getNeedsPatchAttribute()
-    {
-        return $this->attributes['needs_patch'] = $this->needs_upgrade || $this->release !== Release::latestReleaseForMinorVersion($this->major, $this->minor)->first()->release;
-    }
-
-    public function getChangelogUrlAttribute()
-    {
-        return "https://www.php.net/ChangeLog-{$this->major}.php#{$this->__toString()}";
     }
 
     protected function casts(): array
