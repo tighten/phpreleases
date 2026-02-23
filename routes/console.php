@@ -11,7 +11,6 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-
 Schedule::command(SyncPhpReleases::class)->twiceDaily();
 Schedule::command(SyncPhpReleaseGraphic::class)->daily();
 Schedule::command(SendStatsToSlack::class)->weeklyOn(5, '8:00');
