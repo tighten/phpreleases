@@ -11,13 +11,16 @@ class Release extends Model
 
     protected $guarded = ['id'];
 
-    protected $casts = [
-        'tagged_at' => 'datetime',
-        'active_support_until' => 'datetime',
-        'security_support_until' => 'datetime',
-    ];
-
     protected $appends = ['needs_patch', 'needs_upgrade', 'changelog_url'];
+
+    protected function casts(): array
+    {
+        return [
+            'tagged_at' => 'datetime',
+            'active_support_until' => 'datetime',
+            'security_support_until' => 'datetime',
+        ];
+    }
 
     public function scopeLatestRelease($query)
     {
