@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,8 @@ class Release extends Model
 
     protected $appends = ['needs_patch', 'needs_upgrade', 'changelog_url'];
 
-    public function scopeLatestRelease($query)
+    #[Scope]
+    protected function latestRelease($query)
     {
         return $query->orderByDesc('major')
             ->orderByDesc('minor')
@@ -21,7 +23,8 @@ class Release extends Model
             ->limit(1);
     }
 
-    public function scopeLatestReleaseForMinorVersion($query, $major, $minor)
+    #[Scope]
+    protected function latestReleaseForMinorVersion($query, $major, $minor)
     {
         return $query->where('major', (string) $major)
             ->where('minor', (string) $minor)
@@ -29,12 +32,14 @@ class Release extends Model
             ->limit(1);
     }
 
-    public function scopeHasActiveSupport($query)
+    #[Scope]
+    protected function hasActiveSupport($query)
     {
         return $query->where('active_support_until', '>', now());
     }
 
-    public function scopeHasSecuritySupport($query)
+    #[Scope]
+    protected function hasSecuritySupport($query)
     {
         return $query->where('security_support_until', '>', now());
     }
