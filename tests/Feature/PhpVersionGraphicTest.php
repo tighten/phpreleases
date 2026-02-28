@@ -1,65 +1,55 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Console\Commands\SyncPhpReleaseGraphic;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-final class PhpVersionGraphicTest extends TestCase
-{
-    #[Test]
-    public function it_fetches_the_svg(): void
-    {
-        Storage::fake('public');
+uses(Tests\TestCase::class);
 
-        Http::fake([
-            'https://www.php.net/images/supported-versions.php' => Http::response(file_get_contents('tests/responses/fake-supported-versions.svg')),
-        ]);
+it('fetches the svg', function () {
+    Storage::fake('public');
 
-        $this->artisan(SyncPhpReleaseGraphic::class);
+    Http::fake([
+        'https://www.php.net/images/supported-versions.php' => Http::response(file_get_contents('tests/responses/fake-supported-versions.svg')),
+    ]);
 
-        Storage::disk('public')->assertExists('supported-versions.svg');
-    }
+    $this->artisan(SyncPhpReleaseGraphic::class);
 
-    #[Test]
-    public function it_does_not_store_html_response_from_php_net(): void
-    {
-        Storage::fake('public');
+    Storage::disk('public')->assertExists('supported-versions.svg');
+});
 
-        Log::shouldReceive('warning')
-            ->with('Failed fetching the svg');
+it('does not store html response from php net', function () {
+    Storage::fake('public');
 
-        Http::fake([
-            'https://www.php.net/images/supported-versions.php' => Http::response(file_get_contents('tests/responses/fake-supported-versions-not-found.svg')),
-        ]);
+    Log::shouldReceive('warning')
+        ->with('Failed fetching the svg');
 
-        $this->artisan(SyncPhpReleaseGraphic::class);
+    Http::fake([
+        'https://www.php.net/images/supported-versions.php' => Http::response(file_get_contents('tests/responses/fake-supported-versions-not-found.svg')),
+    ]);
 
-        Storage::disk('public')->assertMissing('supported-versions.svg');
-    }
+    $this->artisan(SyncPhpReleaseGraphic::class);
 
-    #[Test]
-    public function it_does_not_store_if_there_are_no_changes(): void
-    {
-        Storage::fake('public');
+    Storage::disk('public')->assertMissing('supported-versions.svg');
+});
 
-        Http::fake([
-            'https://www.php.net/images/supported-versions.php' => Http::response(file_get_contents('tests/responses/fake-supported-versions.svg')),
-        ]);
+it('does not store if there are no changes', function () {
+    Storage::fake('public');
 
-        // Create the initial svg
-        $this->artisan(SyncPhpReleaseGraphic::class);
+    Http::fake([
+        'https://www.php.net/images/supported-versions.php' => Http::response(file_get_contents('tests/responses/fake-supported-versions.svg')),
+    ]);
 
-        Storage::disk('public')->assertExists('supported-versions.svg');
-        $lastModified = Storage::disk('public')->lastModified('supported-versions.svg');
+    // Create the initial svg
+    $this->artisan(SyncPhpReleaseGraphic::class);
 
-        sleep(2);
-        $this->artisan(SyncPhpReleaseGraphic::class);
+    Storage::disk('public')->assertExists('supported-versions.svg');
+    $lastModified = Storage::disk('public')->lastModified('supported-versions.svg');
 
-        $this->assertSame($lastModified, Storage::disk('public')->lastModified('supported-versions.svg'));
-    }
-}
+    sleep(2);
+    $this->artisan(SyncPhpReleaseGraphic::class);
+
+    $this->assertSame($lastModified, Storage::disk('public')->lastModified('supported-versions.svg'));
+});
