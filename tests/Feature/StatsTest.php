@@ -170,10 +170,10 @@ it('handles a passed date', function () {
 
     // default "current" should have no hits
     $default = Hit::forTimePeriod();
-    $this->assertSame(0, $default['current']);
+    expect($default['current'])->toBe(0);
 
     // create custom time period starting 7 hours ago
     // custom "current" should have one hit
     $custom = Hit::forTimePeriod('week', $now->subHours(7));
-    $this->assertSame(1, $custom['current']);
+    expect($custom['current'])->toBe(1);
 });

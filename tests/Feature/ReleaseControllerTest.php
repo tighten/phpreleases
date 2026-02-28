@@ -219,9 +219,9 @@ it('returns the latest release', function () {
 
     $latest = Release::latestRelease()->first();
 
-    $this->assertSame(8, $latest->major);
-    $this->assertSame(1, $latest->minor);
-    $this->assertSame(1, $latest->release);
+    expect($latest->major)->toBe(8);
+    expect($latest->minor)->toBe(1);
+    expect($latest->release)->toBe(1);
 });
 
 it('returns correct values for needs patch', function () {
@@ -241,8 +241,8 @@ it('returns correct values for needs patch', function () {
         'active_support_until' => $now->addYear(),
     ]);
 
-    $this->assertTrue($needsPatch->refresh()->needs_patch);
-    $this->assertFalse($noPatch->refresh()->needs_patch);
+    expect($needsPatch->refresh()->needs_patch)->toBeTrue();
+    expect($noPatch->refresh()->needs_patch)->toBeFalse();
 });
 
 it('can get the latest release', function () {
@@ -322,9 +322,9 @@ it('sorts correctly', function () {
         ->assertJsonCount(5);
 
     // the first should be 8.0
-    $this->assertEquals(4, $response[0]['minor']);
+    expect($response[0]['minor'])->toEqual(4);
     // the final should be 8.4
-    $this->assertEquals(0, $response[4]['minor']);
+    expect($response[4]['minor'])->toEqual(0);
 });
 
 it('validates the support type', function () {

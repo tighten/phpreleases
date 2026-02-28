@@ -51,5 +51,5 @@ it('does not store if there are no changes', function () {
     sleep(2);
     $this->artisan(SyncPhpReleaseGraphic::class);
 
-    $this->assertSame($lastModified, Storage::disk('public')->lastModified('supported-versions.svg'));
+    expect(Storage::disk('public')->lastModified('supported-versions.svg'))->toBe($lastModified);
 });
