@@ -9,7 +9,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
 uses(DatabaseMigrations::class);
 
 it('stores the hit', function () {

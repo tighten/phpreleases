@@ -5,7 +5,6 @@ use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
-uses(Tests\TestCase::class);
 uses(DatabaseMigrations::class);
 
 it('can get the releases', function () {

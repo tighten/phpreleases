@@ -1,5 +1,7 @@
 <?php
 
+uses(\Tests\TestCase::class)->in('Feature', 'responses');
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
