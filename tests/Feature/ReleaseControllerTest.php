@@ -217,9 +217,10 @@ it('returns the latest release', function () {
 
     $latest = Release::latestRelease()->first();
 
-    expect($latest->major)->toBe(8);
-    expect($latest->minor)->toBe(1);
-    expect($latest->release)->toBe(1);
+    expect($latest)
+        ->major->toBe(8)
+        ->minor->toBe(1)
+        ->release->toBe(1);
 });
 
 it('returns correct values for needs patch', function () {
