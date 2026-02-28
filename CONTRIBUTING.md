@@ -25,7 +25,7 @@ Before submitting a pull request:
 
 - Check the codebase to ensure that your feature doesn't already exist.
 - Check the pull requests to ensure that another person hasn't already submitted the feature or fix.
-- Run `./vendor/bin/phpunit` and `./vendor/bin/duster`
+- Run `./vendor/bin/pest` and `./vendor/bin/duster`
 
 ## Local Setup
 
