@@ -4,8 +4,6 @@ use App\Console\Commands\SyncPhpReleaseGraphic;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Tests\TestCase;
-
 
 it('fetches the svg', function () {
     Storage::fake('public');

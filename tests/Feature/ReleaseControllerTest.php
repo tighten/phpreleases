@@ -3,7 +3,6 @@
 use App\Models\Release;
 use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase;
 
 uses(DatabaseMigrations::class);
 
