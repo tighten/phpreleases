@@ -1,5 +1,5 @@
 <header class="py-8 bg-gray-700">
-    <div class="flex flex-col max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
+    <div class="flex flex-col max-w-(--breakpoint-xl) px-4 mx-auto sm:px-6 lg:px-8">
 
         <div class="mb-2 mt-4 text-3xl">
             <a href="/" class="inline-block">
@@ -10,7 +10,7 @@
             </a>
         </div>
     </div>
-    <div class="max-w-screen-xl px-4 py-4 mx-auto font-light text-base text-white sm:px-6 lg:px-8">
+    <div class="max-w-(--breakpoint-xl) px-4 py-4 mx-auto font-light text-base text-white sm:px-6 lg:px-8">
         <p class="mb-4 md:mb-2">
             Provides API endpoints for support information for PHP versions 5.6 and later.
         </p>

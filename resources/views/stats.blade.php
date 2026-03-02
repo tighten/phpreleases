@@ -2,7 +2,7 @@
 
 @section('content')
     <dl class="grid grid-cols-1 gap-5 mt-5 sm:grid-cols-4">
-        <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+        <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow-sm sm:p-6">
             <dt class="text-sm font-medium text-gray-500 truncate">Last Week</dt>
             <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
                 <h3>{{ $week['current'] }} hits</h3>
@@ -11,7 +11,7 @@
             </dd>
         </div>
 
-        <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+        <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow-sm sm:p-6">
             <dt class="text-sm font-medium text-gray-500 truncate">Last Month</dt>
             <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
                 <h3>{{ $month['current'] }} hits</h3>
@@ -20,7 +20,7 @@
             </dd>
         </div>
 
-        <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+        <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow-sm sm:p-6">
             <dt class="text-sm font-medium text-gray-500 truncate">All Time</dt>
             <dd class="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
                 <h3>{{ $year['current'] }} hits</h3>
@@ -29,7 +29,7 @@
             </dd>
         </div>
 
-        <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6">
+        <div class="px-4 py-5 overflow-hidden bg-white rounded-lg shadow-sm sm:p-6">
             <dt class="text-sm font-medium text-gray-500 truncate">Top Endpoints <span class="text-xs">(All Time)</span></dt>
             <dd class="mt-1 text-xs font-semibold tracking-tight text-gray-900">
                 @foreach ($top as $topHit)

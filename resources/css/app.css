@@ -1,6 +1,57 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme {
+  --color-*: initial;
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e4e4e7;
+  --color-gray-500: #71717a;
+  --color-gray-700: #2e3036;
+  --color-white: #fff;
+  --color-black: #000;
+
+  --color-indigo-50: #eef2ff;
+  --color-indigo-100: #e0e7ff;
+  --color-indigo-200: #c7d2fe;
+  --color-indigo-300: #a5b4fc;
+  --color-indigo-400: #818cf8;
+  --color-indigo-500: #6366f1;
+  --color-indigo-600: #4f46e5;
+  --color-indigo-700: #4338ca;
+  --color-indigo-800: #3730a3;
+  --color-indigo-900: #312e81;
+  --color-indigo-950: #1e1b4b;
+
+  --color-teal-50: #f0fdfa;
+  --color-teal-100: #ccfbf1;
+  --color-teal-200: #99f6e4;
+  --color-teal-300: #5eead4;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
+  --color-teal-700: #0f766e;
+  --color-teal-800: #115e59;
+  --color-teal-900: #134e4a;
+  --color-teal-950: #042f2e;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 .schedule-wrapper svg {
     max-width: 100%;
@@ -20,11 +71,11 @@
 }
 
 .markdown h3 code, .markdown p code {
-    @apply text-xs bg-gray-700 text-white px-2 py-1 rounded
+    @apply text-xs bg-gray-700 text-white px-2 py-1 rounded-sm
 }
 
 .markdown pre {
-    @apply text-xs bg-gray-700 p-6 rounded-lg mb-10 lg:max-w-screen-md overflow-x-scroll
+    @apply text-xs bg-gray-700 p-6 rounded-lg mb-10 lg:max-w-(--breakpoint-md) overflow-x-scroll
 }
 
 .markdown pre code {
