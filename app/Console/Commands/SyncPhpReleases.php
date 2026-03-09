@@ -44,7 +44,7 @@ class SyncPhpReleases extends Command
             ];
         });
 
-        $releases->each(function ($item) use ($releases, $eolDates) {
+        $releases->each(function ($item) use ($eolDates) {
             $cycle = "{$item['major']}.{$item['minor']}";
             $eol = $eolDates->get($cycle);
 
