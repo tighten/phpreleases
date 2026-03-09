@@ -3,7 +3,7 @@
 @section('content')
 
     <p class="mt-4 text-gray-500">This is a Laravel-based application that leverages the GitHub Repositories API to stream release tags from the
-        <a class="text-indigo-700 hover:text-indigo-900 underline" href="https://github.com/php/php-src">php/php-src</a> repo.
+        <a class="text-indigo-700 hover:text-indigo-900 underline" href="https://github.com/php/php-src">php/php-src</a> repo, and <a class="text-indigo-700 hover:text-indigo-900 underline" href="https://endoflife.date/">endoflife.date</a> to store support info.
     </p>
 
     <p class="mt-4 text-gray-500">This project is heavily inspired by <a class="text-indigo-700 hover:text-indigo-900 underline" href="https://laravelversions.com/">LaravelVersions</a>.</p>

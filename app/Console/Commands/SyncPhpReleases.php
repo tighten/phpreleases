@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\FetchEolDatesFromEndOfLifeDate;
 use App\Actions\FetchReleasesFromGitHub;
 use App\Models\Release;
 use Carbon\Carbon;
@@ -21,6 +22,7 @@ class SyncPhpReleases extends Command
     {
         Log::info('Syncing PHP Releases');
 
+        $eolDates = $this->fetchEolDates();
         $releases = $this->filterToUsefulReleases($this->fetchReleasesFromGitHub());
 
         // Map into arrays containing major, minor, and release numbers
@@ -39,21 +41,20 @@ class SyncPhpReleases extends Command
                 'minor' => $pieces[1],
                 'release' => $pieces[2],
                 'tagged_at' => Carbon::parse($tagDate),
-                'released_at' => Carbon::parse($tagDate)->addDays(2),
-                'active_support_until' => Carbon::parse($tagDate)->addDays(2)->addYears(2),
-                'security_support_until' => Carbon::parse($tagDate)->addDays(2)->addYears(3),
             ];
         });
 
-        $releases->each(function ($item) use ($releases) {
-            // fetch the initial release of the minor version so we access the support dates
-            $initialRelease = $releases
-                ->where('major', $item['major'])
-                ->where('minor', $item['minor'])
-                ->where('release', 0)
-                ->firstOrFail();
+        $releases->each(function ($item) use ($releases, $eolDates) {
+            $cycle = "{$item['major']}.{$item['minor']}";
+            $eol = $eolDates->get($cycle);
 
-            $release = Release::firstOrCreate(
+            if (! $eol) {
+                $this->warn("No EOL data found for PHP {$cycle}, skipping {$cycle}.{$item['release']}");
+
+                return;
+            }
+
+            $release = Release::updateOrCreate(
                 [
                     'major' => $item['major'],
                     'minor' => $item['minor'],
@@ -61,13 +62,15 @@ class SyncPhpReleases extends Command
                 ],
                 [
                     'tagged_at' => $item['tagged_at'],
-                    'active_support_until' => $initialRelease['active_support_until'],
-                    'security_support_until' => $initialRelease['security_support_until'],
+                    'active_support_until' => Carbon::parse($eol['support']),
+                    'security_support_until' => Carbon::parse($eol['eol']),
                 ]
             );
 
             if ($release->wasRecentlyCreated) {
                 $this->info('Created PHP release ' . $release);
+            } elseif ($release->wasChanged()) {
+                $this->info('Updated PHP release ' . $release);
             }
 
             return $release;
@@ -76,6 +79,11 @@ class SyncPhpReleases extends Command
         $this->info('Finished saving PHP releases.');
 
         return self::SUCCESS;
+    }
+
+    private function fetchEolDates()
+    {
+        return (new FetchEolDatesFromEndOfLifeDate)();
     }
 
     private function fetchReleasesFromGitHub()
