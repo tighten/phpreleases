@@ -24,7 +24,7 @@
     ],
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^12.54",
+        "laravel/framework": "^12.55",
         "laravel/slack-notification-channel": "^3.7",
         "laravel/tinker": "^2.10.1",
         "stevegrunwell/time-constants": "^1.1"
