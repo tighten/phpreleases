@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+#[Fillable(['endpoint', 'user_agent', 'referer', 'ip'])]
 class Hit extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['endpoint', 'user_agent', 'referer', 'ip'];
 
     /**
      * @param  string  $period  Available Options: millenium, century, decade,
