@@ -6,18 +6,18 @@ use App\Actions\FetchEolDatesFromEndOfLifeDate;
 use App\Actions\FetchReleasesFromGitHub;
 use App\Models\Release;
 use Carbon\Carbon;
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
+#[Signature('sync:php-releases')]
+#[Description('Pull PHP releases from GitHub into our application.')]
 class SyncPhpReleases extends Command
 {
-    protected $signature = 'sync:php-releases';
-
-    protected $description = 'Pull PHP releases from GitHub into our application.';
-
     public function handle(): int
     {
         Log::info('Syncing PHP Releases');

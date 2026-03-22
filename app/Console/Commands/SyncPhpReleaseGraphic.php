@@ -2,17 +2,17 @@
 
 namespace App\Console\Commands;
 
+use Illuminate\Console\Attributes\Description;
+use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
+#[Signature('sync:php-release-graphic')]
+#[Description('Fetch the most recent Version Support graphic from https://www.php.net/images/supported-versions.php')]
 class SyncPhpReleaseGraphic extends Command
 {
-    protected $signature = 'sync:php-release-graphic';
-
-    protected $description = 'Fetch the most recent Version Support graphic from https://www.php.net/images/supported-versions.php';
-
     public function handle(): int
     {
         $svgResponse = Http::get('https://www.php.net/images/supported-versions.php');
