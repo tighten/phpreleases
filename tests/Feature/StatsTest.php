@@ -1,5 +1,6 @@
 <?php
 
+use App\Console\Commands\SendStatsToSlack;
 use App\Models\Hit;
 use App\Notifications\WeeklyStats;
 use Carbon\CarbonImmutable;
@@ -121,7 +122,7 @@ it('handles first period values', function () {
 test('the slack notification is sent', function () {
     Notification::fake();
 
-    $this->artisan('stats:send')
+    $this->artisan(SendStatsToSlack::class)
         ->assertExitCode(0);
 
     Notification::assertSentTo(
