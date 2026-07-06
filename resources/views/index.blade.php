@@ -18,7 +18,7 @@
     </div>
 
     @if (! $graphicUpdatedToday)
-        <p class="text-xs ml-2 text-gray-600">Graphic updated {{ Carbon\Carbon::createFromTimestamp(Storage::disk('public')->lastModified('supported-versions.svg'))->toDateTimeString() }}</p>
+        <p class="text-xs ml-2 text-gray-600">Graphic updated {{ Illuminate\Support\Carbon::createFromTimestamp(Storage::disk('public')->lastModified('supported-versions.svg'))->toDateTimeString() }}</p>
     @endif
 
     <h3 class="text-2xl font-extrabold tracking-tight text-gray-900 mt-12">
