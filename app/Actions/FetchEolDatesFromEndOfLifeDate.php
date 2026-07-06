@@ -12,9 +12,7 @@ class FetchEolDatesFromEndOfLifeDate
         return cache()->remember('endoflife::php', HOUR_IN_SECONDS, function () {
             $response = Http::get('https://endoflife.date/api/php.json');
 
-            if (! $response->ok()) {
-                abort($response->status(), 'Error fetching EOL data from endoflife.date');
-            }
+            abort_unless($response->ok(), $response->status(, 'Error fetching EOL data from endoflife.date'));
 
             return collect($response->json())->keyBy('cycle');
         });

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 

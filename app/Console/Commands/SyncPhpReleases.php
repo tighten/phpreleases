@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Actions\FetchEolDatesFromEndOfLifeDate;
 use App\Actions\FetchReleasesFromGitHub;
 use App\Models\Release;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;

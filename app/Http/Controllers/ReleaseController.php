@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ReleaseResource;
 use App\Models\Release;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;

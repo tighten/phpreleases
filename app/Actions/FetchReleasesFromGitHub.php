@@ -83,9 +83,7 @@ class FetchReleasesFromGitHub
 
         $responseJson = $response->json();
 
-        if (! $response->ok()) {
-            abort($response->getStatusCode(), 'Error connecting to GitHub: ' . $responseJson['message']);
-        }
+        abort_unless($response->ok(), $response->getStatusCode(, 'Error connecting to GitHub: ' . $responseJson['message']));
 
         return $responseJson;
     }
