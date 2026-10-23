@@ -5,14 +5,16 @@ namespace App\Console\Commands;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 #[Signature('sync:php-release-graphic')]
 #[Description('Fetch the most recent Version Support graphic from https://www.php.net/images/supported-versions.php')]
 class SyncPhpReleaseGraphic extends Command
 {
+    public const CACHE_KEY = 'supported-versions-graphic';
+
     public function handle(): int
     {
         $svgResponse = Http::get('https://www.php.net/images/supported-versions.php');
@@ -25,14 +27,14 @@ class SyncPhpReleaseGraphic extends Command
         }
 
         // Check if there are any changes to the SVG since we last synced it
-        if (
-            Storage::disk('public')->exists('supported-versions.svg')
-            && Storage::disk('public')->get('supported-versions.svg') === $svgResponse->body()
-        ) {
+        if ((Cache::get(self::CACHE_KEY)['svg'] ?? null) === $svgResponse->body()) {
             return self::SUCCESS;
         }
 
-        Storage::disk('public')->put('supported-versions.svg', $svgResponse);
+        Cache::forever(self::CACHE_KEY, [
+            'svg' => $svgResponse->body(),
+            'updated_at' => now()->timestamp,
+        ]);
 
         return self::SUCCESS;
     }

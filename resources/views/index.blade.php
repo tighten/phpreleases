@@ -13,12 +13,14 @@
         <span class="text-xs ml-2 text-gray-600">From <a href="https://www.php.net/supported-versions.php" class="text-indigo-700 hover:text-indigo-900 underline">php.net</a></span>
     </h3>
 
-    <div class="schedule-wrapper">
-        {!! Storage::disk('public')->get('supported-versions.svg') !!}
-    </div>
+    @if ($graphic)
+        <div class="schedule-wrapper">
+            {!! $graphic !!}
+        </div>
 
-    @if (! $graphicUpdatedToday)
-        <p class="text-xs ml-2 text-gray-600">Graphic updated {{ Carbon\Carbon::createFromTimestamp(Storage::disk('public')->lastModified('supported-versions.svg'))->toDateTimeString() }}</p>
+        @if ($graphicUpdatedAt->lt(now()->subDay()))
+            <p class="text-xs ml-2 text-gray-600">Graphic updated {{ $graphicUpdatedAt->toDateTimeString() }}</p>
+        @endif
     @endif
 
     <h3 class="text-2xl font-extrabold tracking-tight text-gray-900 mt-12">
