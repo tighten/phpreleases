@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\RecordHit;
 use App\Providers\AppServiceProvider;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,7 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->redirectGuestsTo(fn () => route('login'));
         $middleware->redirectUsersTo(AppServiceProvider::HOME);
 
-        $middleware->append(\App\Http\Middleware\RecordHit::class);
+        $middleware->append(RecordHit::class);
 
         $middleware->throttleApi();
     })
