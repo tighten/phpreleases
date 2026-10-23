@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Commands\SyncPhpReleaseGraphic;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class IndexController
 {
     public function index(): View
     {
-        return view('index', ['graphicUpdatedToday' => $this->graphicHasBeenUpdatedToday()]);
-    }
+        $graphic = Cache::get(SyncPhpReleaseGraphic::CACHE_KEY);
 
-    public function graphicHasBeenUpdatedToday(): bool
-    {
-        // check if the graphic exists and has been updated today
-        return Storage::disk('public')->exists('supported-versions.svg') && Carbon::now()->subDay()->timestamp < Storage::disk('public')->lastModified('supported-versions.svg');
+        return view('index', [
+            'graphic' => $graphic['svg'] ?? null,
+            'graphicUpdatedAt' => isset($graphic['updated_at']) ? Carbon::createFromTimestamp($graphic['updated_at']) : null,
+        ]);
     }
 }

@@ -1,25 +1,25 @@
 <?php
 
 use App\Console\Commands\SyncPhpReleaseGraphic;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
+
+uses(RefreshDatabase::class);
 
 it('fetches the svg', function () {
-    Storage::fake('public');
-
     Http::fake([
         'https://www.php.net/images/supported-versions.php' => Http::response(file_get_contents('tests/responses/fake-supported-versions.svg')),
     ]);
 
     $this->artisan(SyncPhpReleaseGraphic::class);
 
-    Storage::disk('public')->assertExists('supported-versions.svg');
+    expect(Cache::get(SyncPhpReleaseGraphic::CACHE_KEY)['svg'])
+        ->toBe(file_get_contents('tests/responses/fake-supported-versions.svg'));
 });
 
 it('does not store html response from php net', function () {
-    Storage::fake('public');
-
     Log::shouldReceive('warning')
         ->with('Failed fetching the svg');
 
@@ -29,12 +29,10 @@ it('does not store html response from php net', function () {
 
     $this->artisan(SyncPhpReleaseGraphic::class);
 
-    Storage::disk('public')->assertMissing('supported-versions.svg');
+    expect(Cache::has(SyncPhpReleaseGraphic::CACHE_KEY))->toBeFalse();
 });
 
 it('does not store if there are no changes', function () {
-    Storage::fake('public');
-
     Http::fake([
         'https://www.php.net/images/supported-versions.php' => Http::response(file_get_contents('tests/responses/fake-supported-versions.svg')),
     ]);
@@ -42,11 +40,26 @@ it('does not store if there are no changes', function () {
     // Create the initial svg
     $this->artisan(SyncPhpReleaseGraphic::class);
 
-    Storage::disk('public')->assertExists('supported-versions.svg');
-    $lastModified = Storage::disk('public')->lastModified('supported-versions.svg');
+    $updatedAt = Cache::get(SyncPhpReleaseGraphic::CACHE_KEY)['updated_at'];
 
-    sleep(2);
+    $this->travel(2)->seconds();
     $this->artisan(SyncPhpReleaseGraphic::class);
 
-    expect(Storage::disk('public')->lastModified('supported-versions.svg'))->toBe($lastModified);
+    expect(Cache::get(SyncPhpReleaseGraphic::CACHE_KEY)['updated_at'])->toBe($updatedAt);
+});
+
+it('renders the homepage without a synced graphic', function () {
+    $this->withoutVite()->get('/')->assertOk();
+});
+
+it('renders the synced graphic on the homepage', function () {
+    Cache::forever(SyncPhpReleaseGraphic::CACHE_KEY, [
+        'svg' => '<svg id="supported-versions"></svg>',
+        'updated_at' => now()->subDays(2)->timestamp,
+    ]);
+
+    $this->withoutVite()->get('/')
+        ->assertOk()
+        ->assertSee('<svg id="supported-versions"></svg>', false)
+        ->assertSee('Graphic updated');
 });
